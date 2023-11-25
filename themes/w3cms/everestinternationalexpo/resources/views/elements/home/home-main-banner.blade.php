@@ -7,7 +7,7 @@
 				<div class="col-lg-6 banner-top-img">
 					<figure class="banner-image">
 						<div class="pattern-overlay overlay-circle"></div>
-						<img src="assets/img/eventum-img38.png" alt="">
+						<img src="{{ theme_asset('img/eventum-img38.png')}}" alt="">
 					</figure>
 				</div>
 				<div class="col-lg-6">

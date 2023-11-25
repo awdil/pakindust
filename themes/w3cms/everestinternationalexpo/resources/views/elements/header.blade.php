@@ -75,7 +75,7 @@
 			<div class="hb-group d-flex align-items-center justify-content-between">
 				<div class="site-identity col-lg-3">
 					<p class="site-title">
-						<a href="{{ url('/') }}" class="logo-light"><img src="{{ theme_asset('images/logo-full-white.png') }}" alt="{{ __('light theme site logo') }}"></a>
+						<a href="{{ url('/') }}" class="logo-light"><img src="{{ theme_asset('images/logo-green.png') }}" alt="{{ __('light theme site logo') }}"></a>
 					</p>
 				</div>
 				
