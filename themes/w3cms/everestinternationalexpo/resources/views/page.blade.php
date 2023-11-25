@@ -5,19 +5,19 @@
         <!-- Page Detail -->
 
         @if (Str::contains($page->slug, 'home'))
-            @include('elements.home.home-main-banner');
-            @include('elements.home.home-time-counter-section');
-            @include('elements.home.home-about-us-section');
-            @include('elements.home.home-progress-section');
+            @include('elements.home.home-main-banner')
+            @include('elements.home.home-time-counter-section')
+            @include('elements.home.home-about-us-section')
+            @include('elements.home.home-progress-section')
             @include('elements.home.home-event-section');
-            @include('elements.home.home-event-speaker-section');
-            @include('elements.home.home-schedule-section');
-            @include('elements.home.home-pricing-section');
-            @include('elements.home.home-gallery-section');
-            @include('elements.home.home-testimonial-section');
-            @include('elements.home.home-partner-section');
-            @include('elements.home.home-blog-section');
-            @include('elements.home.home-contct-us-section');
+            @include('elements.home.home-event-speaker-section')
+            @include('elements.home.home-schedule-section')
+            @include('elements.home.home-pricing-section')
+            @include('elements.home.home-gallery-section')
+            @include('elements.home.home-testimonial-section')
+            @include('elements.home.home-partner-section')
+            @include('elements.home.home-blog-section')
+            @include('elements.home.home-contct-us-section')
         @else
             <!-- Banner  -->
             <div class="dz-bnr-inr style-1 text-center">

@@ -1,5 +1,5 @@
 @php
-	$menu_class = !empty($menu_class) ? $menu_class : 'nav navbar-nav navbar'; 
+	$menu_class = !empty($menu_class) ? $menu_class : ''; 
 @endphp
 <ul class="{{ $menu_class }}">
 	@if ($menus)
@@ -7,7 +7,7 @@
 			@php
 				$active = '';
 				if (Request::url() == $menuitem->link) {
-					$active = 'active';
+					$active = 'current-menu-item';
 				}
 				$sub_menu_class = $menuitem->child_menu_items->isNotEmpty() ? 'sub-menu-down' : '' ; 
 			@endphp

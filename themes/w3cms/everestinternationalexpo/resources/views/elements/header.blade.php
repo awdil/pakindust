@@ -85,12 +85,12 @@
 						{{ DzHelper::nav_menu(
 							array(
 								'theme_location'  => 'primary',
-								'menu_class'      => 'nav navbar-nav navbar',
+								'menu_class'      => '',
 							)
 						); }}
 					</nav>
 					<div class="header-btn d-inline-block">
-						<a href="contact.html" class="button-round-primary">BUY TICKET</a>
+						<a href="contact.html" class="button-round-primary">REGISTER</a>
 					</div>
 				</div>
 			</div>
