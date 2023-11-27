@@ -5,19 +5,19 @@
 		<div class="home-aboutus-inner">
 			<div class="about-gallary">
 				<figure class=" figure-round-border">
-					<img src="assets/img/eventum-img33.jpg" alt="">
+					<img src="{{theme_asset('img/eventum-img33.jpg')}}" alt="">
 				</figure>
 				<figure class=" figure-round-border">
-					<img src="assets/img/eventum-img35.jpg" alt="">
+					<img src="{{theme_asset('img/eventum-img35.jpg')}}" alt="">
 				</figure>
 				<figure class=" figure-round-border">
-					<img src="assets/img/eventum-img34.jpg" alt="">
+					<img src="{{theme_asset('img/eventum-img34.jpg')}}" alt="">
 				</figure>
 			</div>
 			<div class="home-about-right">
 				<div class="about-content">
 					<figure class="about-top-right-img figure-round-border">
-						<img src="assets/img/eventum-img36.jpg" alt="">
+						<img src="{{theme_asset('img/eventum-img36.jpg')}}" alt="">
 					</figure>
 					<div class="section-head">
 						<span class="section-sub-title ">INTRODUCTION</span>
@@ -31,7 +31,7 @@
 				</div>
 				<div class="about-detail">
 					<figure class="about-bottom-right-img figure-round-border">
-						<img src="assets/img/eventum-img37.jpg" alt="">
+						<img src="{{theme_asset('img/eventum-img37.jpg')}}" alt="">
 					</figure>
 					<div class="about-detail-inner">
 						<div class="about-list">
@@ -52,7 +52,7 @@
 						</div>
 						<div class="author-content">
 							<figure class="auhtor-signature">
-								<img src="assets/img/bloggable-img14.png" alt="">
+								<img src="{{theme_asset('img/bloggable-img14.png')}}" alt="">
 							</figure>
 							<div class="author-detail">
 								<h6 class="author-name">MD WILLIAM HOUSTON</h6>

@@ -9,7 +9,7 @@
 				if (Request::url() == $menuitem->link) {
 					$active = 'current-menu-item';
 				}
-				$sub_menu_class = $menuitem->child_menu_items->isNotEmpty() ? 'sub-menu-down' : '' ; 
+				$sub_menu_class = $menuitem->child_menu_items->isNotEmpty() ? 'menu-item-has-children' : '' ; 
 			@endphp
 			<li class="{{ $sub_menu_class }} {{ $active }}">
 				<a href="{{ $menuitem->link }}" {{ ($menuitem->menu_target == 1) ? 'target="_blank"' : '' ; }} class="{{ $menuitem->css_classes }}" title="{{ $menuitem->attribute }}">{{ $menuitem->title }}</a>

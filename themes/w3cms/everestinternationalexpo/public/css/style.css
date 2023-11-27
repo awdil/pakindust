@@ -2306,7 +2306,7 @@ input[type=submit]:focus {
   margin-bottom: 0;
 }
 .site-identity img {
-  max-width: 215px;
+  max-width: 250px;
   -webkit-transition: opacity 0.4s linear;
   -moz-transition: opacity 0.4s linear;
   -ms-transition: opacity 0.4s linear;
@@ -3146,7 +3146,7 @@ input[type=submit]:focus {
   opacity: 0.35;
 }
 .home-banner .home-banner-inner .banner-content {
-  padding: 0px 38px 76px;
+  padding: 0px 2px 76px;
   text-align: center;
 }
 .home-banner .home-banner-inner .banner-content .banner-title {
