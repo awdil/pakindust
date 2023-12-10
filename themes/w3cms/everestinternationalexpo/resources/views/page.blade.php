@@ -18,30 +18,16 @@
             @include('elements.home.home-partner-section')
             @include('elements.home.home-blog-section')
             @include('elements.home.home-contct-us-section')
+        @elseif(Str::contains($page->slug, 'contact-us'))
+            @include('elements.common-banner-inner-pages')
+        @elseif(Str::contains($page->slug, 'about-us'))
+            @include('elements.common-banner-inner-pages')
+        @elseif(Str::contains($page->slug, 'register'))
+            @include('elements.common-banner-inner-pages')
+        @elseif(Str::contains($page->slug, 'exhibitors'))
+            @include('elements.common-banner-inner-pages')
         @else
-            <!-- Banner  -->
-            <div class="dz-bnr-inr style-1 text-center">
-
-                <div class="container">
-                    <div class="dz-bnr-inr-entry">
-                        <h1 class="text-center">{{ Str::limit($page->title, 20, ' ...') }}</h1>
-                        <!-- Breadcrumb Row -->
-                        <nav aria-label="breadcrumb" class="breadcrumb-row">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/') }}">{{ __('Home') }}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ Str::limit($page->title, 10, ' ...') }}</li>
-                            </ul>
-                        </nav>
-                        <!-- Breadcrumb Row End -->
-                    </div>
-                </div>
-                <img class="bg-shape1" src="{{ theme_asset('images/home-banner/shape1.png') }}" alt="{{ __('Banner Shape 1') }}">
-                <img class="bg-shape2" src="{{ theme_asset('images/home-banner/shape1.png') }}" alt="{{ __('Banner Shape 2') }}">
-                <img class="bg-shape3" src="{{ theme_asset('images/home-banner/shape3.png') }}" alt="{{ __('Banner Shape 3') }}">
-                <img class="bg-shape4" src="{{ theme_asset('images/home-banner/shape3.png') }}" alt="{{ __('Banner Shape 4') }}">
-            
-            </div>
-            <!-- Banner End -->
+            @include('elements.common-banner-inner-pages')
         @endif
 
         @if ($page)
@@ -76,8 +62,7 @@
             </div>
             @endif
             @if ($status == 'unlock_'.$page->id)
-                {!! $page->content !!}
-
+                @include('elements.common-pages-content')
                 <!-- Child Pages Detail End -->
                 @if (optional($page->child_pages)->isNotEmpty())
                 <div class="container">
