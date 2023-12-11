@@ -26,8 +26,6 @@
 	<!-- MOBILE SPECIFIC -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<!-- Custom Stylesheet -->
-	<link rel="stylesheet" href="{{ theme_asset('css/style.css') }}">
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{ theme_asset('vendors/bootstrap/css/bootstrap.min.css') }}" media="all">
@@ -53,6 +51,8 @@
 	<!-- slick slider css -->
 	<link rel="stylesheet" type="text/css" href="{{ theme_asset('vendors/slick/slick.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ theme_asset('vendors/slick/slick-theme.css') }}">
+    	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="{{ theme_asset('css/style.css') }}">
 
 
 	<!-- Google Fonts -->
@@ -66,7 +66,7 @@
         }
     </style>
 </head>
-<body>
+<body class="home">
 
 	<!--*******************
         Preloader start
@@ -75,17 +75,17 @@
         Preloader end
     ********************-->
 	
-	<div class="page-wraper">
+	<div class="">
 
 		<!-- header -->
 		@include('elements.header')
 		<!-- header END -->
 		
-		<div class="page-content">
+		<main id="content" class="site-main">
 
 			@yield('content')
 
-		</div>
+        </main>
 
 		<!-- Footer -->
 		@include('elements.footer')
