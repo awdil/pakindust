@@ -121,8 +121,8 @@
 
 												<div class="img-parent-box">
 													@if($configuration->value)
-														<img src="{{ asset('storage/configuration-images/'.$configuration->value) }}" alt="{{ $configuration->value }}" id="img{{ $configuration->id }}" class="configurationPrefixImg img-for-onchange">
-													@endif
+														<img src="{{ route('configuration.previewImage', ['id' => $i]) }}" alt="{{ $configuration->value }}" id="img{{ $configuration->id }}" class="configurationPrefixImg img-for-onchange">
+														@endif
 
 			                                        <div class="form-file d-inline-block">
 														<input type="{{ $inputType }}"  accept=".png, .jpg, .jpeg"  name="Configuration[{{ $i }}][value]" id="Configuration.{{ $i }}.Value" class="form-file-input img-input-onchange ps-2 form-control" {{ $disabled }} {{ $configuration->params }}>

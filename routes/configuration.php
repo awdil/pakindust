@@ -35,7 +35,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->group(function
 	Route::match(['post'], '/configurations/save_permalink', [ConfigurationsController::class, 'save_permalink'])->name('admin.configurations.save_permalink');
 	Route::match(['post'], '/configurations/upload_editor_image', [ConfigurationsController::class, 'upload_editor_image'])->name('admin.configurations.upload_editor_image');
 	Route::get('/configurations/remove_image/{id}/{name}', [ConfigurationsController::class, 'remove_config_image'])->name('admin.configurations.remove_config_image');
-
+	Route::get('configuration/image/{id}', [ConfigurationsController::class, 'previewImage'])->name('configuration.previewImage');
 });
 
 Route::controller(HomeController::class)->group(function () {
@@ -48,17 +48,8 @@ Route::controller(HomeController::class)->group(function () {
 			$rewritecode 	= config('menu.permalink_structure');
 			$link 			= str_replace( $rewritecode, $rewritereplace, $permalink );
 			
-			if(empty($link) || Str::contains(URL::current(), 'install'))
-			{
-				$link = '/';
-			}
 			
 		    $pageLink = '/{slug}';
-
-		    if(empty($permalink) || Str::contains(URL::current(), 'install'))
-		    {
-		    	$pageLink = '?page_id={page_id?}';
-		    }
 		    
 		    Route::get('/category/{slug?}', 'blogcategory')->name('permalink.category_action');
 			Route::get('/author/{name?}', 'author')->name('permalink.author_action');

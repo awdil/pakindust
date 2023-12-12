@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
 
-class Configuration extends Model
+class Configuration extends Model implements HasMedia
 {
-	use HasFactory;
+	use HasFactory, InteractsWithMedia;
 
 	protected $table = 'configurations';
 	public $timestamps = false;
@@ -23,6 +25,11 @@ class Configuration extends Model
 		'order',
 		'weight'
 	];
+
+	public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images');
+    }
 
 	public function init(){
 

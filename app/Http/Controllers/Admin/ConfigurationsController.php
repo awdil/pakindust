@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Configuration;
 use Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ConfigurationsController extends Controller
 {
@@ -16,8 +17,57 @@ class ConfigurationsController extends Controller
         return view('admin.configurations.admin_index', compact('configurations', 'page_title'));
         
     }
-    
+
     public function admin_prefix(Request $request, $prefix = NULL) { 
+        $page_title = __('Configuration');
+
+        if($request->isMethod('post')) {
+        
+            if($request->has('Configuration')) {
+                $newArr = array();
+                $fileNameArr = $this->__imageSave($request);
+                foreach ($request->input('Configuration') as $key => $config_value) {
+
+
+                    if(!isset($config_value['value']) && $config_value['input_type'] == 'checkbox') {
+                        $config_value['value'] = 0;
+                    } else if(isset($config_value['value'])) {
+                        $config_value['value'] = $config_value['value'];
+                    }
+                    if(array_key_exists($key, $fileNameArr)) 
+                    {
+                        $config_value['value'] = $fileNameArr[$key];
+                    }
+                    $res = Configuration::where('id', '=', $key)->update($config_value);
+                }
+                return redirect()->back()->with('success', __('Configuration updated successfully'));  
+            } else
+            {
+                return redirect()->back()->with('error', __('There are some problem in form submition.'));
+            }
+        } else {
+            $page_title = $prefix;
+            if($prefix == 'Permalink')
+            {
+                $routesType = array(
+                                'Plain'             => '',
+                                'DayName'           => '/%year%/%month%/%day%/%slug%/',
+                                'MonthName'         => '/%year%/%month%/%slug%/',
+                                'Numeric'           => '/archives/%post_id%',
+                                'PostName'          => '/%slug%/',
+                                'CustomeStructure'  => 'custom',
+                            );
+                $configuration = Configuration::select('id', 'name', 'value', 'title', 'description', 'input_type', 'editable', 'weight', 'params')->where('name', 'LIKE', $prefix.'%')->first();
+                return view('admin.configurations.admin_permalink_prefix', compact('configuration', 'prefix', 'routesType','page_title'));
+            }
+            $configurations = Configuration::select('id', 'name', 'value', 'title', 'description', 'input_type', 'editable', 'weight', 'params')->where('name', 'LIKE', $prefix.'%')->get();
+            return view('admin.configurations.admin_prefix', compact('configurations', 'prefix','page_title'));
+        }
+
+
+    }
+    
+    public function admin_prefix90(Request $request, $prefix = NULL) { 
         $page_title = __('Configuration');
 
         if($request->isMethod('post')) {
@@ -196,12 +246,53 @@ class ConfigurationsController extends Controller
     }
 
 
+    private function __imageSave($request)
+    {
+        $fileNameArr = [];
+
+        if (empty($request->file('Configuration'))) {
+            return $fileNameArr;
+        }
+
+        foreach ($request->file('Configuration') as $imgKey => $imgValue) {
+            if (is_array($imgValue['value'])) {
+                $fileFullNames = [];
+
+                foreach ($imgValue['value'] as $image) {
+                    $fileFullName = $image->hashName();
+                    $image->storeAs('uploads/configuration-images', $fileFullName);
+
+                    // Add the media to the 'images' collection
+                    Configuration::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileFullName))
+                        ->toMediaCollection('images');
+
+                    $fileFullNames[] = $fileFullName;
+                }
+
+                $fileName = implode(",", $fileFullNames);
+            } else {
+                $fileName = $imgValue['value']->hashName();
+                $imgValue['value']->storeAs('uploads/configuration-images', $fileName);
+
+                // Add the media to the 'images' collection
+                Configuration::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileName))
+                    ->toMediaCollection('images');
+            }
+
+            $fileNameArr[$imgKey] = $fileName;
+        }
+
+        return $fileNameArr;
+    }
+
+
     /**
     * image save function
     *
     *
     **/
-    private function __imageSave($request) {
+
+    private function __oldimageSave($request) {
         $fileNameArr = array();
         if(empty($request->file('Configuration')))
         {
@@ -213,7 +304,7 @@ class ConfigurationsController extends Controller
 
                 foreach ($imgValue['value'] as $image) {
                     $fileName = $image->hashName();
-                    $image->storeAs('public/configuration-images', $image->hashName());
+                    $image->storeAs('uploades/configuration-images', $image->hashName());
                     $fileFullName[] = $fileName;
                 }
 
@@ -222,7 +313,7 @@ class ConfigurationsController extends Controller
             }else {
 
                 $fileName = time().'.'.$imgValue['value']->getClientOriginalName();
-                $imgValue['value']->storeAs('public/configuration-images', $fileName);
+                $imgValue['value']->storeAs('uploades/configuration-images', $fileName);
                 
             }
                 $fileNameArr[$imgKey] = $fileName;
@@ -254,17 +345,32 @@ class ConfigurationsController extends Controller
         {
             unset($images[$key]);
         }
-        if(!empty($config->value) && Storage::exists('public/configuration-images/'.$image))
+        if(!empty($config->value) && Storage::exists('uploades/configuration-images/'.$image))
         {
             $images = explode(",",$config->value);
             if(($key = array_search($image, $images)) !== false)
             {
                 unset($images[$key]);
             }
-            Storage::delete('public/configuration-images/'.$image);
+            Storage::delete('uploades/configuration-images/'.$image);
             $config->value = implode(',', $images);
             return $config->save();
         }
+    }
+
+    public function previewImage($id)
+    {
+        $configuration = Configuration::findOrFail($id);
+
+        // Get the first image from the 'images' collection (modify as needed)
+        $media = $configuration->getMedia('images')->first();
+
+        if (!$media) {
+            abort(404);
+        }
+
+        // You can customize the response headers based on your needs
+        return response()->file($media->getPath());
     }
     
 }

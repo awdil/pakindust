@@ -176,8 +176,8 @@ class HomeController extends Controller
     }
 
     /*
-    * Created By : Chandan Singh.
-    * Created On : 29 / 10 / 2022.
+    * Created By : Adil Amin.
+    * Created On : 29 / 10 / 2023.
     * blogcategory() function use for return view of category.blade.php based on slug,
     * this function return single category view with blogs of the category.
     */
@@ -200,8 +200,8 @@ class HomeController extends Controller
     }
 
     /*
-	* Created By : Chandan Singh.
-	* Created On : 29 / 10 / 2022.
+	* Created By : Adil Amin.
+	* Created On : 29 / 10 / 2023.
 	* blogtag() function use for return view of Blog tags based on title,
     * this function return single tag view with blogs of the tag.
 	*/
@@ -222,7 +222,7 @@ class HomeController extends Controller
 	
 	
 	/*
-	* Created By : Chandan Singh.
+	* Created By : Adil Amin.
 	* Created On : 30 / 10 / 2022.
     * author() function use for return view of archive.blade.php,
     * this function return single author page with blogs of the user.
@@ -248,8 +248,8 @@ class HomeController extends Controller
 
 
 	/*
-	* Created By : Chandan Singh.
-	* Created On : 29 / 10 / 2022
+	* Created By : Adil Amin.
+	* Created On : 29 / 10 / 2023
     * blogarchive() function use for return view of archive.blade.php,
     * this function return single archive page with blogs by month and year,
     * $month is the name of month that return in the view.
@@ -279,8 +279,8 @@ class HomeController extends Controller
 
 	
 	/*
-	* Created By : Chandan Singh.
-	* Created On : 29 / 10 / 2022.
+	* Created By : Adil Amin.
+	* Created On : 29 / 10 / 2023.
 	* search() function use for return view of search,
     * this function return single search page with blogs and pages that match by search data,
 	*/
@@ -324,8 +324,8 @@ class HomeController extends Controller
     }
 
     /*
-    * Created By : Chandan Singh.
-    * Created On : 29 / 10 / 2022.
+    * Created By : Adil Amin.
+    * Created On : 29 / 10 / 2023.
     * blogslist() function use for return view of blog list,
     * this function return list of blogs when route get 'blog' in url ,
     */
@@ -341,7 +341,7 @@ class HomeController extends Controller
     }
 
     /*
-    * Created By : Chandan Singh.
+    * Created By : Adil Amin.
     * Created On : 17 / 12 / 2022.
     * contact() function use for return view of contact us page and save contact details in database,
     * this function return Contact Page when route get 'Page' in url ,

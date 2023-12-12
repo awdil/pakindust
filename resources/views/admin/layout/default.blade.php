@@ -68,13 +68,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="{!! url('/admin'); !!}" class="brand-logo">
-                @if (!empty(config('Site.icon_logo')) && !empty(config('Site.text_logo')))
-                    <img class="logo-abbr" src="{{ asset('storage/configuration-images/'.config('Site.icon_logo')) }}">
-                    <img class="brand-title" src="{{ asset('storage/configuration-images/'.config('Site.text_logo')) }}">
-                @else
-                    <img class="logo-abbr" src="{{ asset('images/logo.png') }}">
-                    <img class="brand-title" src="{{ asset('images/logo-text.png') }}">
-                @endif
+                <img class="brand-title" src="{{ asset('images/logo.png') }}">
             </a>
 
             <div class="nav-control">
