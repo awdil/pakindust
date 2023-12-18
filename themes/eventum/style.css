@@ -2031,7 +2031,7 @@ input[type=submit]:focus {
 
 /*--- top header css start ---*/
 .top-header {
-  padding: 15px 0px;
+  padding: 3px 0px;
   border-bottom: 1px solid #787878;
 }
 @media screen and (max-width: 575px) {
@@ -2075,8 +2075,8 @@ input[type=submit]:focus {
 .header-contact-info ul li a .icon i {
   color: #ffffff;
   font-size: 16px;
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   position: relative;
   display: block;
   line-height: 43px;
@@ -2088,8 +2088,8 @@ input[type=submit]:focus {
 @media screen and (max-width: 768px) {
   .header-contact-info ul li a .icon i {
     font-size: 14px;
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     line-height: 32px;
   }
 }
@@ -3263,7 +3263,7 @@ input[type=submit]:focus {
   font-family: "Poppins", sans-serif;
   font-size: 60px;
   font-weight: 700;
-  color: rgba(250, 3, 104, 0.54);
+  color: #196235;
   line-height: 1.2;
   text-align: center;
 }
@@ -3694,21 +3694,21 @@ input[type=submit]:focus {
 }
 .home-event-section .type-of-event-wrap .event-type .event-icon-content .event-icon a i {
   font-size: 75px;
-  color: #FA0368;
+  color: #2bcf2e;
   transition: all 0.4s;
 }
 .home-event-section .type-of-event-wrap .event-type .event-icon-content .event-icon a i:hover {
-  color: #AB094B;
+  color: #2bcf2e;
 }
 .home-event-section .type-of-event-wrap .event-type .event-icon-content .event-num {
-  color: rgba(250, 3, 104, 0.1);
+  color: rgba(14, 212, 143, 0.1);
   margin-bottom: 0;
 }
 .home-event-section .type-of-event-wrap .event-type .event-detail .event-title a {
   transition: all 0.4s;
 }
 .home-event-section .type-of-event-wrap .event-type .event-detail .event-title a:hover {
-  color: #AB094B;
+  color: #2bcf2e;
 }
 .home-event-section .type-of-event-wrap .event-type .event-detail p {
   margin-bottom: 0;

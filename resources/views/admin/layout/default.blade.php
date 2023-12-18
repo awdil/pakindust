@@ -68,7 +68,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="{!! url('/admin'); !!}" class="brand-logo">
-                <img class="brand-title" src="{{ asset('images/logo.png') }}">
+                <img style=" width: 186px !important; " class="logo" src="{{ asset('images/logo.png') }}">
             </a>
 
             <div class="nav-control">

@@ -57,13 +57,17 @@ Route::controller(HomeController::class)->group(function () {
 			Route::get('/search', 'search')->name('permalink.search');
 			Route::get('/{year}/{month?}', 'blogarchive')->name('permalink.archive_action')->where(['year' => '[0-9]{4}+','month' => '[0-9]|[0-9]{2}']);
 			Route::get('/blog', 'blogslist');
+			Route::get('/news-center', 'blogslist');
 			Route::match(['get','post'],'/contact', 'contact')->name('front.contact');
 
-			Route::match(['get','post'],'/', 'all')->name('permalink.action');
+			//Route::match(['get','post'],'/', 'all')->name('permalink.action');
 		    
+			Route::match(['get', 'post'], '/', 'all')->name('permalink.home_action');
+
 		   	Route::match(['get','post'],$pageLink, 'detail')->name('permalink.page_action');
 			if ($link != '/' || $_GET || $_POST ) {
 		   		Route::match(['get','post'],$link, 'detail')->name('permalink.action');
+				//Route::match(['get', 'post'], $link, 'detail')->name('permalink.custom_action');
 			}
 
 		}

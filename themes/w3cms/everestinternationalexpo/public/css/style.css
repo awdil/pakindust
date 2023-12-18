@@ -1499,7 +1499,7 @@ input[type=submit]:focus {
   background-color: #3b5998;
 }
 .social-icon-wrap .social-pinterest a {
-  background-color: #bd081c;
+  background-color: #196235;
 }
 .social-icon-wrap .social-whatsapp a {
   background-color: #25d366;
@@ -1511,11 +1511,11 @@ input[type=submit]:focus {
   background-color: #1da1f2;
 }
 .social-icon-wrap .social-google a {
-  background-color: #dd4b39;
+  background-color: #196235;
 }
 
 .to-top-icon {
-  background-color: rgba(250, 3, 104, 0.7);
+  background-color: #196235;
   color: #ffffff;
   font-size: 12px;
   display: none;
@@ -1884,7 +1884,7 @@ input[type=submit]:focus {
 }
 
 .video-button a {
-  background-color: rgba(250, 3, 104, 0.8);
+  background-color: #196235;
   display: inline-block;
   position: relative;
   cursor: pointer;
@@ -2022,6 +2022,8 @@ input[type=submit]:focus {
   width: 100%;
   top: 0;
   z-index: 99;
+  background-color: #222222;
+  opacity: 0.85;
 }
 .site-header:before, .site-header:after {
   content: "";
@@ -2031,7 +2033,7 @@ input[type=submit]:focus {
 
 /*--- top header css start ---*/
 .top-header {
-  padding: 15px 0px;
+  padding: 3px 0px;
   border-bottom: 1px solid #787878;
 }
 @media screen and (max-width: 575px) {
@@ -2075,8 +2077,8 @@ input[type=submit]:focus {
 .header-contact-info ul li a .icon i {
   color: #ffffff;
   font-size: 16px;
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   position: relative;
   display: block;
   line-height: 43px;
@@ -2088,8 +2090,8 @@ input[type=submit]:focus {
 @media screen and (max-width: 768px) {
   .header-contact-info ul li a .icon i {
     font-size: 14px;
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     line-height: 32px;
   }
 }
@@ -3263,7 +3265,7 @@ input[type=submit]:focus {
   font-family: "Poppins", sans-serif;
   font-size: 60px;
   font-weight: 700;
-  color: rgba(250, 3, 104, 0.54);
+  color: #196235;
   line-height: 1.2;
   text-align: center;
 }
@@ -3351,7 +3353,7 @@ input[type=submit]:focus {
 }
 .home-aboutus .home-aboutus-inner .home-about-right .about-detail .about-detail-inner .about-list {
   border-radius: 25px;
-  border-bottom: 3px solid rgba(250, 3, 104, 0.54);
+  border-bottom: 3px solid ;
   background-color: #f8f8f8;
   padding: 25px;
   margin-bottom: 20px;
@@ -3701,7 +3703,7 @@ input[type=submit]:focus {
   color: #114424;
 }
 .home-event-section .type-of-event-wrap .event-type .event-icon-content .event-num {
-  color: rgba(250, 3, 104, 0.1);
+  color: rgba(14, 212, 143, 0.1);
   margin-bottom: 0;
 }
 .home-event-section .type-of-event-wrap .event-type .event-detail .event-title a {
@@ -3718,7 +3720,7 @@ input[type=submit]:focus {
   opacity: 0.3;
 }
 .home-event-section .type-of-event-wrap .event-type:hover .event-icon-content .event-num {
-  color: rgba(250, 3, 104, 0.3);
+  color: #114424;
 }
 @media screen and (max-width: 991px) {
   .home-event-section .type-of-event-wrap {
@@ -3836,7 +3838,7 @@ input[type=submit]:focus {
   transition: all 0.4s;
 }
 .speaker-event-section .group-member .team-member .team-member-info .social-icon ul li:hover a i {
-  background-color: rgba(171, 9, 75, 0.9);
+  background-color: #114424;
   position: relative;
   transform: translatey(-10px);
 }
@@ -4096,7 +4098,7 @@ input[type=submit]:focus {
 }
 .home-pricing-section .pricing-table-inner .pricing-item .discount-offer {
   padding: 15px 10px;
-  background-color: rgba(250, 3, 104, 0.54);
+  background-color: #196235;
   text-align: center;
 }
 .home-pricing-section .pricing-table-inner .pricing-item .discount-offer h6 {
@@ -7305,7 +7307,7 @@ input[type=submit]:focus {
   z-index: -9;
 }
 .reservation-form .radio-img input:checked ~ label {
-  background-color: rgba(250, 3, 104, 0.54);
+  background-color: #196235;
 }
 .reservation-form .radio-img img {
   vertical-align: middle;
@@ -7869,7 +7871,7 @@ input[type=submit]:focus {
   margin-left: 10px;
 }
 .single-post-section .primary .right-sidebar .comment-area .comment-content .reply {
-  background-color: rgba(250, 3, 104, 0.54);
+  background-color: #196235;
   font-size: 14px;
   color: #ffffff;
   padding: 5px 12px 6px;
@@ -8984,7 +8986,7 @@ procduct details css
   margin-left: 10px;
 }
 .product-tab-outer .tab-container .responsive-tabs .tab-content .card-body .comment-area .comment-content .reply {
-  background-color: rgba(250, 3, 104, 0.54);
+  background-color: #196235;
   font-size: 14px;
   color: #ffffff;
   padding: 5px 12px 6px;

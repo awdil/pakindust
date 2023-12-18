@@ -66,6 +66,36 @@
             </li>
             @endcanany
 
+            @canany(['Controllers > BlogsController > admin_index', 'Controllers > BlogsController > admin_create'])
+            <li>
+                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-381-folder"></i>
+                    <span class="nav-text">{{ __('Exhibitions') }}</span>
+                </a>
+                <ul aria-expanded="false">
+                    @can('Controllers > BlogsController > admin_index')
+                        <li><a href="{{ route('blog.admin.index') }}">{{ __('All Exhibitions') }}</a></li>
+                    @endcan
+                    @can('Controllers > BlogsController > admin_create')
+                        <li><a href="{{ route('blog.admin.create') }}">{{ __('Add New Exhibition') }}</a></li>
+                    @endcan
+                    @can('Controllers > BlogsController > admin_index')
+                        <li><a href="{{ route('blog.admin.index') }}">{{ __('All Catalogues') }}</a></li>
+                    @endcan
+                    @can('Controllers > BlogsController > admin_index')
+                        <li><a href="{{ route('blog.admin.index') }}">{{ __('Add New Catalogue') }}</a></li>
+                    @endcan
+                    @can('Controllers > BlogsController > admin_index')
+                        <li><a href="{{ route('blog.admin.index') }}">{{ __('All Products') }}</a></li>
+                    @endcan
+                    @can('Controllers > BlogsController > admin_index')
+                        <li><a href="{{ route('blog.admin.index') }}">{{ __('Add New Product') }}</a></li>
+                    @endcan
+                    
+                </ul>
+            </li>
+            @endcanany
+
             @canany(['Controllers > PagesController > admin_index', 'Controllers > PagesController > admin_create'])
             <li>
                 <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
