@@ -2022,8 +2022,6 @@ input[type=submit]:focus {
   width: 100%;
   top: 0;
   z-index: 99;
-  background-color: #222222;
-  opacity: 0.85;
 }
 .site-header:before, .site-header:after {
   content: "";
@@ -2319,7 +2317,6 @@ input[type=submit]:focus {
   display: block;
 }
 .site-identity a:hover img, .site-identity a:focus img, .site-identity a:active img {
-  opacity: 0.7;
 }
 @media screen and (max-width: 575px) {
   .site-identity img {

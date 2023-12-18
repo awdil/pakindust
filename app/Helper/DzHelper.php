@@ -350,12 +350,7 @@ class DzHelper
     */
 	public static function siteLogo()
 	{
-		$logo = config('Site.logo');
-		if(empty($logo))
-		{
-			return asset('images/'.config('menu.Site.logo-dark'));
-		}
-		return asset('storage/configuration-images/'.$logo);
+		return asset('images/logo.png');
 	}
 
 	/*

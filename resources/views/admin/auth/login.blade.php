@@ -72,9 +72,9 @@
                                     </div>
                                 </form>
                                 @if (Route::has('register'))
-                                    <div class="new-account mt-3">
+                                    <!-- <div class="new-account mt-3">
                                         <p>{{ __("Don't have an account?") }} <a class="text-primary" href="{{ url('/register') }}">{{ __('Sign up') }}</a></p>
-                                    </div>
+                                    </div> -->
                                 @endif
                             </div>
                         </div>
