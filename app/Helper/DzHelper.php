@@ -452,4 +452,14 @@ class DzHelper
 	    }
 	    return $col_class; 
     }
+
+
+	public static function getConfigDataByName($configName)
+	{
+		$configData = Configuration::where('name', $configName)->first();
+		
+		// Return the configuration data if found, otherwise return null
+		return $configData ?? null;
+	}
+
 }

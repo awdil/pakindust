@@ -1,5 +1,9 @@
-<!-- home banner section html start -->
-<section class="home-banner">
+<!-- home banner section html start  asset('storage/configuration-images/'.$image)  -->
+<?php
+//dd(DzHelper::getConfigDataByName('Site.banner_background')->id);
+//$result = DzHelper::getConfigDataByName('Site.banner_background');
+?>
+<section class="home-banner" style="background-image: url('{{asset('admin/configuration/image/'.DzHelper::getConfigDataByName('Site.banner_background')->id)}}');">
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="home-banner-inner">
@@ -12,16 +16,16 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="banner-content">
-						<h3 class="banner-title">ANNUAL BUSINESS</h3>
-						<span class="banner-title middle-title">CONFERENCE</span>
-						<h1 class="banner-title">EVENT 2022</h1>
+						<h3 class="banner-title">{{config('Site.banner_title')}}</h3>
+						<span class="banner-title middle-title">{{config('Site.middle_title')}}</span>
 						<div class="banner-title-divider-center-white"></div>
+						<h1 class="banner-title">{{config('Site.title_after_middle')}}</h1>
 						<p class="banner-paragraph">
-							Animi ab libero! Blanditiis, luctus morbi eget esse, ridiculus. Quos laborum sunt facere primis magni cumque.
+							{{config('Site.banner_paragraph')}}
 						</p>
 						<div class="banner-button">
-							<a href="reservation.html" class="button-round-primary">BOOK RESERVATION</a>
-							<a href="event-schedule.html" class="button-round-white-transparent">VIEW SCHEDULE</a>
+							<a href="" class="button-round-primary">BOOK RESERVATION</a>
+							<a href="" class="button-round-white-transparent">VIEW SCHEDULE</a>
 						</div>
 					</div>
 				</div>

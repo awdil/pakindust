@@ -2231,8 +2231,8 @@ input[type=submit]:focus {
 }
 .header-social a:hover i, .header-social a:focus i {
   color: #ffffff;
-  background-color: #114424;
-  border-color: #114424;
+  background-color: #0cad47;
+  border-color: #0cad47;
 }
 
 .header-search-icon {
@@ -2399,7 +2399,7 @@ input[type=submit]:focus {
   display: block;
 }
 .site-header .main-navigation ul > li:hover > a, .site-header .main-navigation ul > li:focus > a, .site-header .main-navigation ul > li:active > a {
-  color: #114424;
+  color: #0cad47;
 }
 .site-header .main-navigation ul ul {
   background: #ffffff;
@@ -2437,7 +2437,7 @@ input[type=submit]:focus {
 }
 .site-header .main-navigation ul ul li a:hover, .site-header .main-navigation ul ul li a:focus, .site-header .main-navigation ul ul li a:active {
   padding-left: 30px;
-  color: #196235;
+  color: #0cad47;
 }
 .site-header .main-navigation ul ul li > ul {
   left: 100%;
@@ -2489,7 +2489,7 @@ input[type=submit]:focus {
   color: #ffffff;
 }
 .site-header .main-navigation ul li.current-menu-item > a, .site-header .main-navigation ul li.current-menu-parent > a {
-  color: #196235;
+  color: #0cad47;
 }
 
 @-webkit-keyframes slide-up {

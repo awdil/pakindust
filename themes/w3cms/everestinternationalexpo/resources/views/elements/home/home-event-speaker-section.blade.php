@@ -3,7 +3,7 @@
                 <div class="container">
                     <div class="section-head text-center col-lg-8 offset-lg-2">
                         <span class="section-sub-title ">EVENT SPEAKERS</span>
-                        <h3 class="section-title">
+                        <h3 class="section-title pb-5">
                             OUR EVENT SPEAKERS
                         </h3>
                         <p class="section-paragraph">

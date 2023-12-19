@@ -7,24 +7,24 @@
 					<div class="header-contact-info">
 						<ul>
 							<li>
-								<a href="tel:+01(977)259912">
+								<a href="tel:{{config('Site.contact')}}">
 									<span class="icon">
 										<i aria-hidden="true" class="icon icon-phone1"></i>
 									</span>
 									<div class="details-content">
 										<span class="content-title">PHONE NUMBER :</span>
-										<h6>+01 (977) 2599 12</h6>
+										<h6>{{config('Site.contact')}}</h6>
 									</div>
 								</a>
 							</li>
 							<li>
-								<a href="https://demo.bosathemes.com/cdn-cgi/l/email-protection#30535f5d40515e4970545f5d51595e1e535f5d">
+								<a href="">
 									<span class="icon">
 										<i aria-hidden="true" class="icon icon-envelope3"></i>
 									</span>
 									<div class="details-content">
 										<span class="content-title">EMAIL ADDRESS :</span>
-										<h6><span class="__cf_email__" data-cfemail="6b0804061b0a05122b0f04060a020545080406">[email&#160;protected]</span></h6>
+										<h6><span class="__cf_email__" data-cfemail="{{config('Site.email')}}">{{config('Site.email')}}</span></h6>
 									</div>
 								</a>
 							</li>
