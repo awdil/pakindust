@@ -259,6 +259,15 @@
 										<label for="PublishDateTimeTextbox"><i class="fa fa-calendar"></i> {{ __('Published on:') }}</label>
 										<input type="text" name="data[Exhibition][publish_on]" class="datetimepicker form-control" id="PublishDateTimeTextbox" value="{{ old('data.Exhibition.publish_on', date('Y-m-d')) }}">
 									</div>
+									<div class="col-md-12 form-group">
+										<label for=""><i class="fa fa-calendar"></i> {{ __('Year') }}</label>
+										<select name="data[Exhibition][year]" id="year" class="default-select form-control">
+											@foreach(DzHelper::getYearsList() as $year)
+											<option value="{{ $year }}" {{ old('year') == $year ? 'selected="selected"' : '' }}>{{ $year }}</option>
+											@endforeach
+										</select>
+									</div>
+									
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-primary">{{ __('Publish') }}</button>
 									</div>

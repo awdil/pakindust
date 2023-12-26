@@ -462,6 +462,25 @@ class DzHelper
 		return $configData ?? null;
 	}
 
+	public static function getYearsList($startYear = null, $endYear = null)
+	{
+		if ($startYear === null) {
+			$startYear = 2015;
+		}
+
+		if ($endYear === null) {
+			$endYear = 2030;
+		}
+
+		$years = [];
+
+		for ($year = $startYear; $year <= $endYear; $year++) {
+			$years[] = $year;
+		}
+
+		return $years;
+	}
+
 	public static function saveFile($request, $model, $path, $metatype)
 	{
 		$fileNameArr = [];

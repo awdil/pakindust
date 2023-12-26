@@ -18,6 +18,7 @@ class Exhibition extends Model implements HasMedia
         'slug',
         'content',
         'excerpt',
+        'year',
         'comment',
         'password',
         'status',
