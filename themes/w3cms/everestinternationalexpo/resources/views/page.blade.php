@@ -10,7 +10,7 @@
             @include('elements.home.home-about-us-section')
             @include('elements.home.home-progress-section')
             @include('elements.home.home-event-section');
-            @include('elements.home.home-event-speaker-section')
+            @include('elements.home.home-catalogues-section')
             @include('elements.home.home-schedule-section')
             @include('elements.home.home-pricing-section')
             @include('elements.home.home-gallery-section')

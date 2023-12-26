@@ -20,6 +20,17 @@ class PagesController extends Controller
 		return view('front.pages.index', compact('page','page_title'));
 	}
 
+	public function index90($page_slug) {
+		$page_title = __('pages index');
+		$currentYear = date('Y');
+		$exhibitions = Exhibition::whereYear('publish_on', '=', $currentYear)
+		->orderBy('publish_on', 'desc') // Adjust the order based on your requirement
+		->get();
+		$page = Page::with('page_metas', 'page_seo')->firstWhere('slug', $page_slug);
+		dd($exhibitions);
+		return view('front.pages.index', compact('page','page_title','exhibitions'));
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * @return Renderable

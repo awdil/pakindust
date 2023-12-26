@@ -18,6 +18,7 @@ require __DIR__.'/admin.php';
 require __DIR__.'/fortify.php';
 require __DIR__.'/blog.php';
 require __DIR__.'/page.php';
+require __DIR__.'/exhibition.php';
 require __DIR__.'/menu.php';
 require __DIR__.'/tools.php';
 require __DIR__.'/configuration.php';

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Exhibition;
+use App\Models\exhibitionMeta;
 use Illuminate\Http\Request;
 
-class ExhibitionController extends Controller
+class ExhibitionMetaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ExhibitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\exhibitionMeta  $exhibitionMeta
      * @return \Illuminate\Http\Response
      */
-    public function show(Exhibition $exhibition)
+    public function show(exhibitionMeta $exhibitionMeta)
     {
         //
     }
@@ -52,10 +52,10 @@ class ExhibitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\exhibitionMeta  $exhibitionMeta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Exhibition $exhibition)
+    public function edit(exhibitionMeta $exhibitionMeta)
     {
         //
     }
@@ -64,10 +64,10 @@ class ExhibitionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\exhibitionMeta  $exhibitionMeta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exhibition $exhibition)
+    public function update(Request $request, exhibitionMeta $exhibitionMeta)
     {
         //
     }
@@ -75,10 +75,10 @@ class ExhibitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\exhibitionMeta  $exhibitionMeta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exhibition $exhibition)
+    public function destroy(exhibitionMeta $exhibitionMeta)
     {
         //
     }

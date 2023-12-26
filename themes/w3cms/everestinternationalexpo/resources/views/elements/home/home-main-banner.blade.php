@@ -2,8 +2,9 @@
 <?php
 //dd(DzHelper::getConfigDataByName('Site.banner_background')->id);
 //$result = DzHelper::getConfigDataByName('Site.banner_background');
+$url= route('configuration.publicImagePreview', ['id' => DzHelper::getConfigDataByName('Site.banner_background')->id]);
 ?>
-<section class="home-banner" style="background-image: url('{{asset('admin/configuration/image/'.DzHelper::getConfigDataByName('Site.banner_background')->id)}}');">
+<section class="home-banner" style="background-image: url('{{ asset($url) }}');">
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="home-banner-inner">

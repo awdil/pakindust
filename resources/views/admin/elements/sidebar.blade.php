@@ -74,22 +74,22 @@
                 </a>
                 <ul aria-expanded="false">
                     @can('Controllers > BlogsController > admin_index')
-                        <li><a href="{{ route('blog.admin.index') }}">{{ __('All Exhibitions') }}</a></li>
+                        <li><a href="{{ route('exhibitions.admin.index') }}">{{ __('All Exhibitions') }}</a></li>
                     @endcan
                     @can('Controllers > BlogsController > admin_create')
-                        <li><a href="{{ route('blog.admin.create') }}">{{ __('Add New Exhibition') }}</a></li>
+                        <li><a href="{{ route('exhibitions.admin.create') }}">{{ __('Add New Exhibition') }}</a></li>
                     @endcan
                     @can('Controllers > BlogsController > admin_index')
-                        <li><a href="{{ route('blog.admin.index') }}">{{ __('All Catalogues') }}</a></li>
+                        <li><a href="{{ route('exhibitions.admin.index') }}">{{ __('All Catalogues') }}</a></li>
                     @endcan
                     @can('Controllers > BlogsController > admin_index')
-                        <li><a href="{{ route('blog.admin.index') }}">{{ __('Add New Catalogue') }}</a></li>
+                        <li><a href="{{ route('exhibitions.admin.index') }}">{{ __('Add New Catalogue') }}</a></li>
                     @endcan
                     @can('Controllers > BlogsController > admin_index')
-                        <li><a href="{{ route('blog.admin.index') }}">{{ __('All Products') }}</a></li>
+                        <li><a href="{{ route('exhibitions.admin.index') }}">{{ __('All Products') }}</a></li>
                     @endcan
                     @can('Controllers > BlogsController > admin_index')
-                        <li><a href="{{ route('blog.admin.index') }}">{{ __('Add New Product') }}</a></li>
+                        <li><a href="{{ route('exhibitions.admin.index') }}">{{ __('Add New Product') }}</a></li>
                     @endcan
                     
                 </ul>

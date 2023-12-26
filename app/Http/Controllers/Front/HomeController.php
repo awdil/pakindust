@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Exhibition;
+use App\Models\PublicConfiguration;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\BlogCategory;
@@ -11,6 +13,9 @@ use App\Models\User;
 use App\Models\BlogTag;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Configuration;
+use Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Cookie;
 use DB;
 use Mail;
@@ -168,9 +173,9 @@ class HomeController extends Controller
                 }
             }
             /* For Password Protected Page */
-
+            $exhibitions=$this->exhibitions(config('Site.exhibition_count_on_homepage'));
             $blog = null;
-            return view('page', compact('page','blog','status'));
+            return view('page', compact('page','blog','status','exhibitions'));
         }
         /* For Single Page Detail End*/
     }
@@ -386,5 +391,44 @@ class HomeController extends Controller
         }
         
         return view('contact');
+    }
+
+    public function publicImagePreview($id)
+    {
+        $configuration = Configuration::findOrFail($id);
+       
+        $media = $configuration->getMedia('images')->first();
+        if (!$media) {
+            abort(404);
+        }
+
+        // You can customize the response headers based on your needs
+        return response()->file($media->getPath());
+    }
+
+    public function exhibitionPublicImagePreview($id)
+    {
+        $configuration = Exhibition::findOrFail($id);
+        
+        $media = $configuration->getMedia('images')->first();
+        if (!$media) {
+            abort(404);
+        }
+
+        // You can customize the response headers based on your needs
+        return response()->file($media->getPath());
+    }
+    
+
+    public function exhibitions($limit = 0)
+    {
+        $currentYear = date('Y');
+        $query = Exhibition::whereYear('publish_on', '=', $currentYear)
+            ->orderBy('publish_on', 'desc');
+        if ($limit > 0) {
+            $query->take($limit);
+        }
+        $exhibitions = $query->get();
+        return $exhibitions;
     }
 }

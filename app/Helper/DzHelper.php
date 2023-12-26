@@ -462,4 +462,141 @@ class DzHelper
 		return $configData ?? null;
 	}
 
+	public static function saveFile($request, $model, $path, $metatype)
+	{
+		$fileNameArr = [];
+
+		$filedata = $request->file('data');
+		$filedata = $filedata[$metatype] ?? [];
+
+		foreach ($filedata as $imgKey => $imgValue) {
+			$imgKey = $model->id;
+
+			try {
+				if (is_array($imgValue['value'])) {
+					$fileFullNames = [];
+
+					foreach ($imgValue['value'] as $image) {
+						$fileFullName = $image->hashName();
+						$image->storeAs($path, $fileFullName);
+
+						// Add the media to the 'images' collection
+						$model::find($imgKey)->addMedia(storage_path("app/{$path}/{$fileFullName}"))
+							->toMediaCollection('images');
+
+						$fileFullNames[] = $fileFullName;
+					}
+
+					$fileName = implode(",", $fileFullNames);
+				} elseif ($imgValue['value'] instanceof \Illuminate\Http\UploadedFile) {
+					$fileName = $imgValue['value']->hashName();
+					$imgValue['value']->storeAs($path, $fileName);
+
+					// Add the media to the 'images' collection
+					$model::find($imgKey)->addMedia(storage_path("app/{$path}/{$fileName}"))
+						->toMediaCollection('images');
+				}
+
+				$fileNameArr[$imgKey] = $fileName ?? null;
+			} catch (\Exception $e) {
+				// Log the exception or perform any other appropriate action
+				// For example: Log::error($e->getMessage());
+			}
+		}
+
+		return $fileNameArr;
+	}
+	public static function saveFile90($request, $model, $path, $metatype)
+	{
+		$fileNameArr = [];
+
+		$filedata = $request->file('data');
+		$filedata = $filedata[$metatype] ?? [];
+
+		foreach ($filedata as $imgKey => $imgValue) {
+			$imgKey = $model->id;
+
+			if (is_array($imgValue['value'])) {
+				$fileFullNames = [];
+
+				foreach ($imgValue['value'] as $image) {
+					$fileFullName = $image->hashName();
+					$image->storeAs($path, $fileFullName);
+
+					// Add the media to the 'images' collection
+					$model::find($imgKey)->addMedia(storage_path("app/{$path}/{$fileFullName}"))
+						->toMediaCollection('images');
+
+					$fileFullNames[] = $fileFullName;
+				}
+
+				$fileName = implode(",", $fileFullNames);
+			} elseif ($imgValue['value'] instanceof \Illuminate\Http\UploadedFile) {
+				$fileName = $imgValue['value']->hashName();
+				$imgValue['value']->storeAs($path, $fileName);
+
+				// Add the media to the 'images' collection
+				$model::find($imgKey)->addMedia(storage_path("app/{$path}/{$fileName}"))
+					->toMediaCollection('images');
+			}
+
+			$fileNameArr[$imgKey] = $fileName ?? null;
+		}
+
+		return $fileNameArr;
+	}
+
+
+	public static function saveFile0($request, $model, $path, $metatype)
+	{
+		$fileNameArr = [];
+		$filedata = $request->file('data');
+		$filedata = $filedata[$metatype];
+		foreach ($filedata as $imgKey => $imgValue) {
+			 $imgKey= $model->id;
+            // $fileFullNames = [];
+			// $files = is_array($imgValue['value']) ? $imgValue['value'] : [$imgValue['value']];
+			// dd($files);
+			// foreach ($imgValue['value'] as $image) {
+			// 	$fileFullName = $image->hashName();
+			// 	$image->storeAs($path, $fileFullName);
+
+			// 	// Add the media to the 'images' collection
+			// 	$model->find($imgKey)->addMedia(storage_path("app/{$path}/{$fileFullName}"))
+			// 		->toMediaCollection('images');
+
+			// 	$fileFullNames[] = $fileFullName;
+			// }
+
+			// $fileNameArr[$imgKey] = implode(",", $fileFullNames);
+			if (is_array($imgValue['value'])) {
+                $fileFullNames = [];
+
+                foreach ($imgValue['value'] as $image) {
+                    $fileFullName = $image->hashName();
+                    $image->storeAs($path, $fileFullName);
+
+                    // Add the media to the 'images' collection
+                    $model::find($imgKey)->addMedia(storage_path("app/{$path}/{$fileFullName}"))
+                        ->toMediaCollection('images');
+
+                    $fileFullNames[] = $fileFullName;
+                }
+
+                $fileName = implode(",", $fileFullNames);
+            } else {
+                $fileName = $imgValue['value']->hashName();
+                $imgValue['value']->storeAs($path, $fileName);
+
+                // Add the media to the 'images' collection
+                $model->find($imgKey)->addMedia(storage_path("app/{$path}/{$fileName}"))
+                    ->toMediaCollection('images');
+            }
+
+            $fileNameArr[$imgKey] = $fileName;
+		}
+
+		return $fileNameArr;
+	}
+
 }

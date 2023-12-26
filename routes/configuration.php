@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\MediaController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\ConfigurationsController;
 use App\Http\Controllers\Front\BlogsController;
@@ -38,11 +39,14 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->group(function
 	Route::get('configuration/image/{id}', [ConfigurationsController::class, 'previewImage'])->name('configuration.previewImage');
 });
 
+//Route::get('configuration/image/{id}', [HomeController::class, 'publicImagePreview'])->name('configuration.publicImagePreview');
 Route::controller(HomeController::class)->group(function () {
 	
 	try {
 		if(Schema::hasTable('configurations'))
 		{
+			Route::get('configuration/image/{id}', 'publicImagePreview')->name('configuration.publicImagePreview');
+			Route::get('exhibition/image/{id}', 'exhibitionPublicImagePreview')->name('exhibition.exhibitionPublicImagePreview');
 			$permalink		= Configuration::getConfig('Permalink.settings');
 			$rewritereplace = config('menu.permalink_structure_rewritecode');
 			$rewritecode 	= config('menu.permalink_structure');
