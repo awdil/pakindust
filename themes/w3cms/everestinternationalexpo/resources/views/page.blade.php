@@ -12,7 +12,6 @@
             @include('elements.home.home-event-section');
             @include('elements.home.home-catalogues-section')
             @include('elements.home.home-schedule-section')
-            @include('elements.home.home-pricing-section')
             @include('elements.home.home-gallery-section')
             @include('elements.home.home-testimonial-section')
             @include('elements.home.home-partner-section')

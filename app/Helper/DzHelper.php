@@ -361,7 +361,7 @@ class DzHelper
 		$text = config('Site.footer_text');
 		if(empty($text))
 		{
-			return __('© 2022. All Rights Reserved.');
+			return __('© 2024. All Rights Reserved.');
 		}
 		return $text;
 	}
@@ -373,7 +373,7 @@ class DzHelper
 		$text = config('Site.copyright');
 		if(empty($text))
 		{
-			return __('© 2022. All Rights Reserved.');
+			return __('© 2024. All Rights Reserved.');
 		}
 		return $text;
 	}

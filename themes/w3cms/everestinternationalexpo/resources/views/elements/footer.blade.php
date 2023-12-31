@@ -102,14 +102,14 @@
                         <div class="col-lg-6 col-md-7">
                             <div class="legal-list">
                                 <ul>
-                                    <li> <a href="legal-notice.html">PRIVACY POLICY</a></li>
-                                    <li> <a href="contact.html">SUPPORT</a></li>
-                                    <li> <a href="term-and-condition.html">TERMS & CONDITION</a></li>
+                                    <li> <a class="acolor-white" href="legal-notice.html">PRIVACY POLICY</a></li>
+                                    <li> <a class="acolor-white" href="contact.html">SUPPORT</a></li>
+                                    <li> <a class="acolor-white" href="term-and-condition.html">TERMS & CONDITION</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-5">
-                            <div class="copy-right">{!! config('Site.copyright') !!}</div>
+                            <div class="copy-right acolor-white">{!! config('Site.copyright') !!}</div>
                         </div>
                     </div>
                 </div>

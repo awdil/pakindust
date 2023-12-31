@@ -22,10 +22,10 @@
 					<div class="section-head">
 						<span class="section-sub-title ">INTRODUCTION</span>
 						<h3 class="section-title">
-							KNOW MORE ABOUT OUR GRAND EVENT
+							KNOW MORE ABOUT PAKISTAN INDUSTTRIAL EXPO
 						</h3>
 						<p class="section-paragraph">
-							Consequat sociosqu sem officiis aute ridiculus repellat in aliquip at, metus sociosqu veritatis cubilia ac soluta? Faucibus ipsam, incidunt cras.
+						Everest International Expo (Pvt.) Ltd, based in Pakistan, is a renowned expo company known for precise match-making services. Leveraging abundant resources, it ensures exhibitors benefit beyond the exhibition, earning global recognition for professionalism and quality.
 						</p>
 					</div>
 				</div>
@@ -39,26 +39,18 @@
 								<li>
 									<i aria-hidden="true" class="icon icon-checkmark-circle"></i>
 									<span>
-										Lusto tenetur temporibus repellendus aspernatur, blandit ullam cupidatat quisquam lacinia.
+									Everest provides accurate match-making services for exhibitors, ensuring a comprehensive and beneficial experience for each participant.
 									</span>
 								</li>
 								<li>
 									<i aria-hidden="true" class="icon icon-checkmark-circle"></i>
 									<span>
-										Minima mattis laudantium nobis odit explicabo sapien nunc. Reprehenderit molestiae.
+									The company leverages the abundant resources in Pakistan, offering exhibitors services that go beyond the exhibition itself.
 									</span>
 								</li>
 							</ul>
 						</div>
-						<div class="author-content">
-							<figure class="auhtor-signature">
-								<img src="{{theme_asset('img/bloggable-img14.png')}}" alt="">
-							</figure>
-							<div class="author-detail">
-								<h6 class="author-name">MD WILLIAM HOUSTON</h6>
-								<span class="author-prof">Event Organiser</span>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -73,7 +65,7 @@
 				<div class="place-detail">
 					<h5 class="place-title">WHERE IS THE EVENT :</h5>
 					<span class="place-discription">
-						221B Baker Street, P.O Box 353 Park Road, San Francisco USA - 215431
+						{{config('Home.eventLocation')}}
 					</span>
 				</div>
 			</div>
@@ -86,7 +78,21 @@
 				<div class="place-detail">
 					<h5 class="place-title">WHEN IS THE EVENT :</h5>
 					<span class="place-discription">
-						( Sunday to Wednesday ) 20 January 2022 to 24 January 2022.
+						<?php
+						$eventStartDate = new DateTime(config('Home.eventStart'));
+						$eventEndDate = new DateTime(config('Home.eventEnd'));
+						
+						// Format the dates
+						$formattedStartDate = $eventStartDate->format('l'); // Day of the week (Sunday)
+						$formattedEndDate = $eventEndDate->format('l');     // Day of the week (Wednesday)
+						
+						// Format the date range
+						$dateRange = $eventStartDate->format('j F Y') . ' to ' . $eventEndDate->format('j F Y');
+						
+						// Combine the formatted dates and date range
+						$result = " ($formattedStartDate to $formattedEndDate)  $dateRange";
+						?>
+						{{$result}}
 					</span>
 				</div>
 			</div>

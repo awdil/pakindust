@@ -2312,6 +2312,10 @@ input[type=submit]:focus {
   -ms-transition: opacity 0.4s linear;
   -o-transition: opacity 0.4s linear;
   transition: opacity 0.4s linear;
+  filter: brightness(2);
+}
+.fixed-header .site-identity img {
+  filter: brightness(1);
 }
 .site-identity a {
   display: block;
@@ -2331,6 +2335,24 @@ input[type=submit]:focus {
     display: flex;
     align-items: center;
   }
+}
+
+.light-green{
+  color: #0cad47;
+}
+
+.light-green:hover{
+  color: #8cdeaa;
+}
+
+.acolor-white{
+  color: #fff;
+}
+.acolor-white:hover{
+  color: #0cad47;
+}
+.acolor-green{
+  color: #0cad47;
 }
 
 /*--------------------------------------------------------------
@@ -3908,7 +3930,7 @@ input[type=submit]:focus {
   margin-right: -40px;
 }
 .home-schedule-section .time-circle-wrapper .time-info:nth-child(2) {
-  background-color: rgba(250, 3, 104, 0.64);
+  background-color: #196235;
   margin-right: -40px;
 }
 .home-schedule-section .time-circle-wrapper .time-info:nth-child(2) .time-txt h5,
@@ -3946,10 +3968,10 @@ input[type=submit]:focus {
   margin-bottom: 0;
 }
 .home-schedule-section .routine-content .routine-detail:nth-child(even) .time-detail {
-  background-color: rgba(250, 3, 104, 0.7);
+  background-color: #196235;
 }
 .home-schedule-section .routine-content .routine-detail .time-detail {
-  background-color: rgba(250, 3, 104, 0.5);
+  background-color: #0e3d20;
   text-align: center;
   padding: 68px 30px;
 }
@@ -4861,7 +4883,7 @@ input[type=submit]:focus {
   }
 }
 .site-footer .bottom-footer .legal-list ul li a:hover {
-  color: #114424;
+  color: #0cad47;
 }
 .site-footer .bottom-footer .copy-right {
   text-align: center;
@@ -4893,7 +4915,7 @@ input[type=submit]:focus {
   display: inline-block;
 }
 .top-footer .widget ul li a:hover, .top-footer .widget ul li a:focus, .top-footer .widget ul li a:active {
-  color: #114424;
+  color: #0cad47;
 }
 @media screen and (max-width: 991px) {
   .top-footer .widget {

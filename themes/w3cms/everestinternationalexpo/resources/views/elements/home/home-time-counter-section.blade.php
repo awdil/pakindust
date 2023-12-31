@@ -1,7 +1,7 @@
 
 <!-- home time counter section -->
 <?php 
-	$datetime = date('Y-m-d H:i:s', strtotime(config('Site.eventtime')));
+	$datetime = date('Y-m-d H:i:s', strtotime(config('Home.eventStart')));
 ?>
 <div class="home-count-timmer">
 	<div class="container">
