@@ -89,7 +89,7 @@ class HomeConfigurationUpto57IDSeeder extends Seeder
             'id' => 56
         ], [
             'name' => 'Home.scheduleSection',
-            'value' => '<span class=\"section-sub-title \">SCHEDULE DETAILS</span>\r\n<h3 class=\"section-title\">\r\nINFORMATION OF EVENT SCHEDULE !\r\n</h3>\r\n<p class=\"section-paragraph\">\r\nDiscover the detailed schedule for our upcoming events. Immerse yourself in a carefully curated agenda filled with engaging activities, informative sessions, and valuable networking opportunities. Whether you\'re interested in in-person networking, boosting creativity, or attending after-party events, our schedule has something for everyone.\r\nJoin us on the following dates to make the most out of your event experience\r\n</p>',
+            'value' => `<span class="section-sub-title ">SCHEDULE DETAILS</span><h3 class="section-title">INFORMATION OF EVENT SCHEDULE !</h3><p class="section-paragraph">Discover the detailed schedule for our upcoming events. Immerse yourself in a carefully curated agenda filled with engaging activities, informative sessions, and valuable networking opportunities. Whether you're interested in in-person networking, boosting creativity, or attending after-party events, our schedule has something for everyone. Join us on the following dates to make the most out of your event experience</p>`,
             'title' => 'Schedule Section',
             'description' => 'Schedule Section Content',
             'input_type' => 'textarea',
