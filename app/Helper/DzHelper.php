@@ -9,6 +9,7 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\BlogTag;
 use App\Models\Configuration;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class DzHelper
 {
@@ -616,6 +617,15 @@ class DzHelper
 		}
 
 		return $fileNameArr;
+	}
+
+	public static function findDocumentByMedia($id){
+		$media = Media::findOrFail($id);
+        if (!$media) {
+            abort(404);
+        }
+        $filePath = $media->getPath();
+        return response()->file($filePath);
 	}
 
 }

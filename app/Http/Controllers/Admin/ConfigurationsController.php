@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Helper\DzHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Configuration;
@@ -25,10 +26,13 @@ class ConfigurationsController extends Controller
         
             if($request->has('Configuration')) {
                 $newArr = array();
-                $fileNameArr = $this->__imageSave($request);
+                $fileNameArrRes = $this->__imageSave($request);
+                $fileNameArr = $fileNameArrRes['fileNames'];
+                
+                $configurationResponse = $fileNameArrRes['configurationResponse'];
                 foreach ($request->input('Configuration') as $key => $config_value) {
 
-
+                  
                     if(!isset($config_value['value']) && $config_value['input_type'] == 'checkbox') {
                         $config_value['value'] = 0;
                     } else if(isset($config_value['value'])) {
@@ -36,7 +40,7 @@ class ConfigurationsController extends Controller
                     }
                     if(array_key_exists($key, $fileNameArr)) 
                     {
-                        $config_value['value'] = $fileNameArr[$key];
+                        $config_value['value'] = $configurationResponse->id;
                     }
                     $res = Configuration::where('id', '=', $key)->update($config_value);
                 }
@@ -246,6 +250,45 @@ class ConfigurationsController extends Controller
     }
 
 
+    private function __imageDELESave($request)
+    {
+        $fileNameArr = [];
+
+        if (empty($request->file('Configuration'))) {
+            return $fileNameArr;
+        }
+
+        foreach ($request->file('Configuration') as $imgKey => $imgValue) {
+            if (is_array($imgValue['value'])) {
+                $fileFullNames = [];
+
+                foreach ($imgValue['value'] as $image) {
+                    $fileFullName = $image->hashName();
+                    $image->storeAs('uploads/configuration-images', $fileFullName);
+
+                    // Add the media to the 'images' collection
+                    $response=Configuration::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileFullName))
+                        ->toMediaCollection('images');
+
+                    $fileFullNames[] = $fileFullName;
+                }
+
+                $fileName = implode(",", $fileFullNames);
+            } else {
+                $fileName = $imgValue['value']->hashName();
+                $imgValue['value']->storeAs('uploads/configuration-images', $fileName);
+
+                // Add the media to the 'images' collection
+                $response=Configuration::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileName))
+                    ->toMediaCollection('images');
+            }
+            
+            $fileNameArr[$imgKey] = $fileName;
+        }
+       
+        return $fileNameArr;
+    }
+
     private function __imageSave($request)
     {
         $fileNameArr = [];
@@ -263,7 +306,7 @@ class ConfigurationsController extends Controller
                     $image->storeAs('uploads/configuration-images', $fileFullName);
 
                     // Add the media to the 'images' collection
-                    Configuration::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileFullName))
+                    $res=Configuration::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileFullName))
                         ->toMediaCollection('images');
 
                     $fileFullNames[] = $fileFullName;
@@ -275,14 +318,20 @@ class ConfigurationsController extends Controller
                 $imgValue['value']->storeAs('uploads/configuration-images', $fileName);
 
                 // Add the media to the 'images' collection
-                Configuration::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileName))
+                $res=Configuration::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileName))
                     ->toMediaCollection('images');
             }
-
+            
             $fileNameArr[$imgKey] = $fileName;
         }
-
-        return $fileNameArr;
+       
+        $response = [
+            'fileNames' => $fileNameArr,
+            'configurationResponse' => $res, // Include the response here
+        ];
+        
+        return $response;
+        //return $fileNameArr;
     }
 
 
@@ -371,6 +420,16 @@ class ConfigurationsController extends Controller
 
         // You can customize the response headers based on your needs
         return response()->file($media->getPath());
+    }
+
+    public function previewImageByMedia($id){
+        return DzHelper::findDocumentByMedia($id);
+        // $media = Media::findOrFail($id);
+        // if (!$media) {
+        //     abort(404);
+        // }
+        // $filePath = $media->getPath();
+        // return response()->file($filePath);
     }
     
 }

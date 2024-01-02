@@ -121,7 +121,8 @@
 
 												<div class="img-parent-box">
 													@if($configuration->value)
-														<img src="{{ route('configuration.previewImage', ['id' => $i]) }}" alt="{{ $configuration->value }}" id="img{{ $configuration->id }}" class="configurationPrefixImg img-for-onchange">
+														<!-- <img src="{{ route('configuration.previewImage', ['id' => $i]) }}" alt="{{ $configuration->value }}" id="img{{ $configuration->id }}" class="configurationPrefixImg img-for-onchange"> -->
+														<img src="{{ route('configuration.previewImageByMedia', ['id' => $configuration->value]) }}" alt="{{ $configuration->value }}" id="img{{ $configuration->id }}" class="configurationPrefixImg img-for-onchange">
 														@endif
 
 			                                        <div class="form-file d-inline-block">

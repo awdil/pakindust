@@ -36,7 +36,8 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->group(function
 	Route::match(['post'], '/configurations/save_permalink', [ConfigurationsController::class, 'save_permalink'])->name('admin.configurations.save_permalink');
 	Route::match(['post'], '/configurations/upload_editor_image', [ConfigurationsController::class, 'upload_editor_image'])->name('admin.configurations.upload_editor_image');
 	Route::get('/configurations/remove_image/{id}/{name}', [ConfigurationsController::class, 'remove_config_image'])->name('admin.configurations.remove_config_image');
-	Route::get('configuration/image/{id}', [ConfigurationsController::class, 'previewImage'])->name('configuration.previewImage');
+	Route::get('configuration/image/{id}', [ConfigurationsController::class, 'previewImage'])->name('configuration.previewImage'); 
+	Route::get('configuration/image-of-media/{id}', [ConfigurationsController::class, 'previewImageByMedia'])->name('configuration.previewImageByMedia');
 });
 
 //Route::get('configuration/image/{id}', [HomeController::class, 'publicImagePreview'])->name('configuration.publicImagePreview');
