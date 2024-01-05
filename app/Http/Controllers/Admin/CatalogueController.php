@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use App\Models\Catalogue;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helper\DzHelper;
+use App\Models\Catalogue;
+use App\Models\User;
+// use App\Rules\EditorEmptyCheckRule;
+use Storage;
 
 class CatalogueController extends Controller
 {
@@ -14,7 +18,10 @@ class CatalogueController extends Controller
      */
     public function index()
     {
-        //
+        $page_title = __('All Catalogues');
+        $catalogues = Catalogue::get();
+        $users = User::get();
+        return view('admin.catalogue.index', compact('catalogues','users','page_title'));
     }
 
     /**
