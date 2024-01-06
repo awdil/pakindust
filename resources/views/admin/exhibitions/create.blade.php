@@ -363,6 +363,17 @@
 		'use strict';
 		var screenOptionArray = '<?php echo json_encode($screenOption) ?>';
 	</script>
+	<script>
+        ClassicEditor
+            .create( document.querySelector( 'textarea[name="editor"]' ), {
+                ckfinder: {
+                    uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json',
+                },
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endpush
 
 @endsection

@@ -13,11 +13,11 @@ use App\Http\Controllers\Admin\CatalogueController;
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified', 'permissions'])->prefix('admin/catalogue')->group(function () {
-    Route::get('/', [CatalogueController::class, 'index'])->name('catalogue.admin.index');
-    Route::get('/create', [CatalogueController::class, 'create'])->name('catalogue.admin.create');
-    Route::post('/store', [CatalogueController::class, 'store'])->name('catalogue.admin.store');
-    Route::get('/edit/{id}', [CatalogueController::class, 'edit'])->name('catalogue.admin.edit');
-    Route::post('/update/{id}', [CatalogueController::class, 'update'])->name('catalogue.admin.update');
-    Route::get('/delete/{id}', [CatalogueController::class, 'destroy'])->name('catalogue.admin.destroy');
+Route::middleware(['auth:sanctum', 'verified', 'permissions'])->prefix('admin/catalogues')->group(function () {
+    Route::get('/', [CatalogueController::class, 'admin_index'])->name('catalogues.admin.index');
+    Route::get('/create', [CatalogueController::class, 'admin_create'])->name('catalogues.admin.create');
+    Route::post('/store', [CatalogueController::class, 'admin_store'])->name('catalogues.admin.store');
+    Route::get('/edit/{id}', [CatalogueController::class, 'admin_edit'])->name('catalogues.admin.edit');
+    Route::post('/update/{id}', [CatalogueController::class, 'admin_update'])->name('catalogues.admin.update');
+    Route::get('/delete/{id}', [CatalogueController::class, 'admin_destroy'])->name('catalogues.admin.destroy');
 });

@@ -113,7 +113,7 @@ class ExhibitionsController extends Controller
         $validation = [
             'data.Exhibition.title'           => 'required',
             'data.Exhibition.content'         => ['required', new EditorEmptyCheckRule],
-            'data.Exhibition.slug'            => 'unique:blogs,slug',
+            'data.Exhibition.slug'            => 'unique:exhibitions,slug',
             'data.Exhibition.publish_on'      => 'required',
             'data.ExhibitionMeta.0.value'     => 'mimes:jpg,png,jpeg,gif',
         ];
@@ -178,7 +178,7 @@ class ExhibitionsController extends Controller
         $exhibitions = Exhibition::where('id', '!=', $id)->get();
         $users = User::get();
         $exhibition = Exhibition::with('user', 'featuredImage')->findorFail($id);
-        
+        //dd($exhibition);
         // $blogCatArr = array_column($blog->blog_categories->toArray(), 'id');
         // $categoryArr = (new BlogCategory())->generateCategoryTreeListCheckbox(Null, ' ', $blogCatArr);
         // $parentCategoryArr = (new BlogCategory())->generateCategoryTreeArray(Null, '&nbsp;&nbsp;&nbsp;');
@@ -201,7 +201,7 @@ class ExhibitionsController extends Controller
                 'data.Exhibition.title'           => 'required',
                 'data.Exhibition.content'         => ['required', new EditorEmptyCheckRule],
                 'data.Exhibition.publish_on'      => 'required',
-                'data.Exhibition.slug'            => 'unique:blogs,slug,'.$id,
+                'data.Exhibition.slug'            => 'unique:exhibitions,slug,'.$id,
                 'data.BlogMeta.0.value'     => 'mimes:jpg,png,jpeg,gif',
             ];
 
@@ -215,92 +215,26 @@ class ExhibitionsController extends Controller
 
         $this->validate($request, $validation, $validationMsg);
 
-        $blog               = Blog::findorFail($id);
-        $blogArr            = $request->input('data.Blog');
-        $blogArr['slug']    = $request->input('data.Exhibition.editslug');
-        $blog->fill($blogArr)->save();
-        $blog_metas = collect($request->data['BlogMeta'])->sortKeys()->all();
-        $blog_tags  = !empty($request->input('data.BlogTag')) ? explode(',', $request->input('data.BlogTag')) : '';
-
-        if($blog)
+        $exhibition               = Exhibition::findorFail($id);
+        $exhibitionArr            = $request->input('data.Exhibition');
+        $exhibitionArr['slug']    = $request->input('data.Exhibition.editslug');
+        
+        $exhibition->fill($exhibitionArr)->save();
+        if($exhibition)
         {
-            BlogSeo::updateOrCreate(
-                ['blog_id' => $blog->id],
-                [
-                    'blog_id'           => $blog->id, 
-                    'page_title'        => $request->input('data.BlogSeo.page_title'), 
-                    'meta_keywords'     => $request->input('data.BlogSeo.meta_keywords'),
-                    'meta_descriptions' => $request->input('data.BlogSeo.meta_descriptions'),
-                    'blog_url'          => $request->input('data.BlogSeo.blog_url'),
-                ]
-            );
-
-            $BlogTagIds = array();
-
-            if(!empty($blog_tags))
-            {
-                foreach ($blog_tags as $blog_tag) 
-                {
-                    $BlogTag = BlogTag::where('title', '=', $blog_tag)->where('user_id', '=', \Auth::id())->first();
-
-                    if(!empty($BlogTag))
-                    {
-                        $BlogTagIds[] = $BlogTag->id;
+            $result = $this->__imageUpdate($request, $exhibition, 'ExhibitionMeta');
+            if(count($result)>0){
+                foreach ($result as $exhibitionId => $imageFilename) {
+                    $exhibitionrecord = Exhibition::find($exhibitionId);
+                    if ($exhibitionrecord) {
+                        $exhibition->featured_id = $exhibitionId;
+                        $exhibition->featured_image = $imageFilename;
+                        $exhibition->update();
                     }
-                    else
-                    {
-                        $BlogTag = new BlogTag();
-                        $BlogTag->title = $blog_tag;
-                        $BlogTag->slug = $blog_tag;
-                        $BlogTag->user_id = \Auth::id();
-                        $BlogTag->save();
-                        $BlogTagIds[] = $BlogTag->id;
-                    }
-
                 }
             }
-
-            $blog->blog_categories()->sync($request->input('data.BlogCategory'));
-            $blog->blog_tags()->sync($BlogTagIds);
-
-            if(!empty($blog_metas))
-            {   
-                $blogMetaIds = array_column($blog_metas, 'meta_id');
-                BlogMeta::where('blog_id', '=', $id)->whereNotIn('id', $blogMetaIds)->delete();
-
-                foreach ($blog_metas as $blog_meta) {
-
-                    if($blog_meta['title'] != 'ximage')
-                    {
-                        $blog->blog_meta()->create($blog_meta);
-                    }
-                    else
-                    {
-                        if(!empty($blog_meta['value']))
-                        {
-                            $OriginalName = $blog_meta['value']->getClientOriginalName();
-                            $fileName = time().'_'.$OriginalName;
-                            $blog_meta['value']->storeAs('public/blog-images/', $fileName);
-                            if($blog_meta['old_value'] && Storage::exists('public/blog-images/'.$blog_meta['old_value']))
-                            {
-                                Storage::delete('public/blog-images/'.$blog_meta['old_value']);
-                            }
-                            $blog_meta['value'] = $fileName;
-                        }
-                        else
-                        {
-                            if(Storage::exists('public/blog-images/'.$blog_meta['old_value']))
-                            {
-                                $blog_meta['value'] = $blog_meta['old_value'];
-                            }
-                        }
-                        $blog->blog_meta()->create($blog_meta);
-                    }
-                    
-                }
-            }
-
-            return redirect()->route('blog.admin.index')->with('success', __('Blog added successfully.'));
+           
+            return redirect()->route('exhibitions.admin.index')->with('success', __('Exhibition added successfully.'));
 
         }
         return redirect()->back()->with('error', __('Something went wrong. Please try again.'));
@@ -531,6 +465,48 @@ class ExhibitionsController extends Controller
         $filedata = $request->file('data');
 		$filedata = $filedata[$metatype] ?? [];
 
+        if (empty($filedata)) {
+            return $fileNameArr;
+        }
+
+        foreach ($filedata as $imgKey => $imgValue) {
+			$imgKey = $model->id;
+            if (is_array($imgValue['value'])) {
+                $fileFullNames = [];
+
+                foreach ($imgValue['value'] as $image) {
+                    $fileFullName = $image->hashName();
+                    $image->storeAs('uploads/configuration-images', $fileFullName);
+
+                    // Add the media to the 'images' collection
+                    $response=Exhibition::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileFullName))
+                        ->toMediaCollection('images');
+
+                    $fileFullNames[] = $fileFullName;
+                }
+
+                $fileName = implode(",", $fileFullNames);
+            } else {
+                $fileName = $imgValue['value']->hashName();
+                $imgValue['value']->storeAs('uploads/configuration-images', $fileName);
+
+                // Add the media to the 'images' collection
+                $response=Exhibition::find($imgKey)->addMedia(storage_path('app/uploads/configuration-images/' . $fileName))
+                    ->toMediaCollection('images');
+            }
+
+            $fileNameArr[$response->id] = $fileName;
+        }
+
+        return $fileNameArr;
+    }
+
+    private function __imageUpdate($request, $model, $metatype)
+    {
+        $fileNameArr = [];
+
+        $filedata = $request->file('data');
+		$filedata = $filedata[$metatype] ?? [];
         if (empty($filedata)) {
             return $fileNameArr;
         }

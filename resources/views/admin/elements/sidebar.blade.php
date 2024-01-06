@@ -79,11 +79,11 @@
                     @can('Controllers > BlogsController > admin_create')
                         <li><a href="{{ route('exhibitions.admin.create') }}">{{ __('Add New Exhibition') }}</a></li>
                     @endcan
-                    @can('Controllers > BlogsController > admin_index')
-                        <li><a href="{{ route('catalogue.admin.index') }}">{{ __('All Catalogues') }}</a></li>
+                    @can('Controllers > CatalogueController > admin_index')
+                        <li><a href="{{ route('catalogues.admin.index') }}">{{ __('All Catalogues') }}</a></li>
                     @endcan
-                    @can('Controllers > BlogsController > admin_index')
-                        <li><a href="{{ route('exhibitions.admin.index') }}">{{ __('Add New Catalogue') }}</a></li>
+                    @can('Controllers > CatalogueController > admin_create')
+                        <li><a href="{{ route('catalogues.admin.create') }}">{{ __('Add New Catalogue') }}</a></li>
                     @endcan
                     @can('Controllers > BlogsController > admin_index')
                         <li><a href="{{ route('exhibitions.admin.index') }}">{{ __('All Products') }}</a></li>

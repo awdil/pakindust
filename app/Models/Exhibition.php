@@ -44,33 +44,6 @@ class Exhibition extends Model implements HasMedia
     }
 
     /**
-     * Blog has many Blog_meta.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    
-
-    /**
-     * Blog has one Blog Seo.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function blog_seo()
-    {
-        return $this->hasOne(BlogSeo::class, 'blog_id', 'id');
-    }
-
-    public function blog_categories()
-    {
-        return $this->belongsToMany(BlogCategory::class, 'blog_blog_categories', 'blog_id', 'blog_category_id');
-    }
-
-    public function blog_tags()
-    {
-        return $this->belongsToMany(BlogTag::class, 'blog_blog_tags', 'blog_id', 'blog_tag_id');
-    }
-
-    /**
      * Blog has one Feature_img.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -109,7 +82,7 @@ class Exhibition extends Model implements HasMedia
         
     public function checkSlugIsValid($slug, $id=0)
     {
-        $blog = Blog::where("slug", '=', $slug)->where("id", '!=', $id)->get();        
+        $blog = Catalogue::where("slug", '=', $slug)->where("id", '!=', $id)->get();        
         
         if(!empty($blog))
         {

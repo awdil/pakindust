@@ -36,8 +36,8 @@
 		</div>
 		<div class="col-sm-6 p-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{ route('blog.admin.index') }}">{{ __('Blogs') }}</a></li>
-				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ __('Edit Blog') }}</a></li>
+				<li class="breadcrumb-item"><a href="{{ route('exhibitions.admin.index') }}">{{ __('Exhibitions') }}</a></li>
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ __('Edit Exhibitions') }}</a></li>
 			</ol>
 		</div>
 	</div>
@@ -56,7 +56,7 @@
 								<div class="row">
 									<div class="form-group col-md-12">
 										<label for="BlogTitle">{{ __('Title') }}</label>
-										<input type="text" name="data[Blog][title]" class="form-control" id="BlogTitle" placeholder="{{ __('Title') }}" value="{{ old('data.Exhibition.title', $exhibition->title) }}">
+										<input type="text" name="data[Exhibition][title]" class="form-control" id="BlogTitle" placeholder="{{ __('Title') }}" value="{{ old('data.Exhibition.title', $exhibition->title) }}">
 										@error('data.Exhibition.title')
 											<p class="text-danger">
 												{{ $message }}
@@ -70,14 +70,14 @@
 											{{ url('/') }}/<span class='font-green permalinkSlugSpan'>{{ $exhibition->slug }}</span>
 										</a>
 										<div class="editPermalinkContainer">
-											<input type="text" name="data[Blog][editslug]" id="BlogEditSlug" class="form-control" value="{{ $exhibition->slug }}">
+											<input type="text" name="data[Exhibition][editslug]" id="BlogEditSlug" class="form-control" value="{{ $exhibition->slug }}">
 											<button type="button" class="btn btn-link btn-sm editPermalinkOkButton">{{ __('OK') }}</button>
 											<a href="javascript:void(0);" class="editPermalinkCancelButton">{{ __('Cancel') }}</a>
 										</div>
 										<button type="button" class="btn btn-link btn-sm editPermalink" title="{{ __('Click here to edit the URL') }}">{{ __('Edit') }}</button>
 									</div>
 									<div class="form-group col-md-12">
-										<textarea name="data[Blog][content]" class="form-control W3cmsCkeditor h-auto" id="BlogContent" rows="10">{{ old('data.Exhibition.content', $exhibition->content) }}</textarea>
+										<textarea name="data[Exhibition][content]" class="form-control W3cmsCkeditor h-auto" id="BlogContent" rows="10">{{ old('data.Exhibition.content', $exhibition->content) }}</textarea>
 										@error('data.Exhibition.content')
 											<p class="text-danger">
 												{{ $message }}
@@ -97,7 +97,7 @@
 							<div class="accordion__body p-4 collapse show" id="with-excerpt" data-bs-parent="#accordion-excerpt">
 								<div class="form-group">
 									<label for="ContentExcerpt">{{ __('Excerpt') }}</label>
-									<textarea name="data[Blog][excerpt]" class="form-control mb-1" id="ContentExcerpt" rows="5">{{ old('data.Exhibition.excerpt', $exhibition->excerpt) }}</textarea>
+									<textarea name="data[Exhibition][excerpt]" class="form-control mb-1" id="ContentExcerpt" rows="5">{{ old('data.Exhibition.excerpt', $exhibition->excerpt) }}</textarea>
 									<small>{{ __('Excerpts are optional hand-crafted summaries of your content that can be used in your theme.') }}</small>
 								</div>
 							</div>
@@ -113,7 +113,7 @@
 								<div id="AppendContainer">
 									@php
 										$count = 1;
-										$custom_fields = old('data.BlogMeta') ? old('data.BlogMeta') : $exhibition->blog_meta;
+										$custom_fields = old('data.ExhibitionMeta') ? old('data.ExhibitionMeta') : $exhibition->blog_meta;
 									@endphp
 									@if(!empty($custom_fields))
 										<div id="customFieldContainer">
@@ -126,12 +126,12 @@
 												@endphp
 												<div class="row xrow mb-2">
 													<div class="form-group col-md-6">
-														<label for="BlogMetaName_{{ $count }}">{{ __('Title') }}</label> 
-														<input type="text" name="data[BlogMeta][{{ $count }}][title]" class="form-control" id="BlogMetaName_{{ $count }}" value="{{ $custom_field['title'] }}"> 
+														<label for="ExhibitionMetaName_{{ $count }}">{{ __('Title') }}</label> 
+														<input type="text" name="data[ExhibitionMeta][{{ $count }}][title]" class="form-control" id="ExhibitionMetaName_{{ $count }}" value="{{ $custom_field['title'] }}"> 
 													</div> 
 													<div class="col-md-6 form-group"> 
-														<label for="BlogMetaValue_{{ $count }}">{{ __('Value') }}</label> 
-														<textarea name="data[BlogMeta][{{ $count }}][value]" id="BlogMetaValue_{{ $count }}" class="form-control" rows="5">{{ $custom_field['value'] }}</textarea> 
+														<label for="ExhibitionMetaValue_{{ $count }}">{{ __('Value') }}</label> 
+														<textarea name="data[ExhibitionMeta][{{ $count }}][value]" id="ExhibitionMetaValue_{{ $count }}" class="form-control" rows="5">{{ $custom_field['value'] }}</textarea> 
 													</div> 
 												</div>
 											@endforeach
@@ -141,12 +141,12 @@
 								</div>
 								<div class="row">
 									<div class="col-md-6 form-group">
-										<label for="BlogMetaName">{{ __('Title') }}</label>
-										<input type="text" class="form-control" id="BlogMetaName" placeholder="{{ __('Title') }}">
+										<label for="ExhibitionMetaName">{{ __('Title') }}</label>
+										<input type="text" class="form-control" id="ExhibitionMetaName" placeholder="{{ __('Title') }}">
 									</div>
 									<div class="col-md-6 form-group">
-										<label for="BlogMetaValue">{{ __('Value') }}</label>
-										<textarea class="form-control" id="BlogMetaValue" rows="5"></textarea>
+										<label for="ExhibitionMetaValue">{{ __('Value') }}</label>
+										<textarea class="form-control" id="ExhibitionMetaValue" rows="5"></textarea>
 									</div>
 								</div>
 								<button type="button" class="btn btn-primary btn-sm" id="AddCustomField">{{ __('Add Custom Field') }}</button>
@@ -162,8 +162,8 @@
 							</div>
 							<div class="accordion__body p-4 collapse show" id="with-discussion" data-bs-parent="#accordion-discussion">
 								<div class="form-check mb-2">
-									<input type="hidden" name="data[Blog][comment]" id="ContentComment_" value="0">
-									<input type="checkbox" name="data[Blog][comment]" class="form-check-input" id="ContentComment" value="1" {{ old('data.Exhibition.comment', $exhibition->comment) == '1' ? 'checked' : '' }}>
+									<input type="hidden" name="data[Exhibition][comment]" id="ContentComment_" value="0">
+									<input type="checkbox" name="data[Exhibition][comment]" class="form-check-input" id="ContentComment" value="1" {{ old('data.Exhibition.comment', $exhibition->comment) == '1' ? 'checked' : '' }}>
 									<label class="form-check-label" for="ContentComment">{{ __('Allow comments.') }}</label>
 								</div>
 							</div>
@@ -178,7 +178,7 @@
 							<div class="accordion__body p-4 collapse show" id="with-slug" data-bs-parent="#accordion-slug">
 								<div class="form-group">
 									<label for="slug">{{ __('Slug') }}</label>
-									<input type="text" name="data[Blog][slug]" class="form-control slug" id="slug" value="{{ old('data.Exhibition.slug', $exhibition->slug) }}" disabled="disabled">
+									<input type="text" name="data[Exhibition][slug]" class="form-control slug" id="slug" value="{{ old('data.Exhibition.slug', $exhibition->slug) }}" disabled="disabled">
 									@error('data.Exhibition.slug')
 										<p class="text-danger">
 											{{ $message }}
@@ -197,7 +197,7 @@
 							<div class="accordion__body p-4 collapse show" id="with-author" data-bs-parent="#accordion-author">
 								<div class="form-group">
 									<label for="ContentUserId">{{ __('User') }}</label>
-									<select name="data[Blog][user_id]" class="default-select form-control" id="ContentUserId">
+									<select name="data[Exhibition][user_id]" class="default-select form-control" id="ContentUserId">
 										@forelse($users as $user)
 											<option value="{{ $user->id }}" {{ old('data.Exhibition.user_id', $exhibition->user_id) == $user->id ? 'selected="selected"' : '' }}>{{ $user->full_name }}</option>
 										@empty
@@ -245,7 +245,7 @@
 								<div class="row">
 									<div class="col-md-12 form-group">
 										<label for="Status"><i class="fa fa-key"></i> {{ __('Status:') }}</label>
-										<select name="data[Blog][status]" id="Status" class="default-select form-control">
+										<select name="data[Exhibition][status]" id="Status" class="default-select form-control">
 											<option value="1" {{ old('data.Exhibition.status', $exhibition->status) == 1 ? 'selected="selected"' : '' }}>{{ __('Published') }}</option>
 		                    				<option value="2" {{ old('data.Exhibition.status', $exhibition->status) == 2 ? 'selected="selected"' : '' }}>{{ __('Draft') }}</option>
 
@@ -258,7 +258,7 @@
 									</div>
 									<div class="col-md-12 form-group">
 										<label for="ContentVisibility"><i class="fa fa-eye"></i> {{ __('Visibility:') }}</label>
-										<select name="data[Blog][visibility]" id="ContentVisibility" class="default-select form-control">
+										<select name="data[Exhibition][visibility]" id="ContentVisibility" class="default-select form-control">
 											<option value="Pu" {{ old('data.Exhibition.visibility', $exhibition->visibility) == 'Pu' ? 'selected="selected"' : '' }}>{{ __('Public') }}</option>
 		                    				<option value="PP" {{ old('data.Exhibition.visibility', $exhibition->visibility) == 'PP' ? 'selected="selected"' : '' }}>{{ __('Password protected') }}</option>
 		                    				<option value="Pr" {{ old('data.Exhibition.visibility', $exhibition->visibility) == 'Pr' ? 'selected="selected"' : '' }}>{{ __('Private') }}</option>
@@ -266,11 +266,11 @@
 									</div>
 									<div class="col-md-12 form-group {{ old('visibility', $exhibition->visibility) == 'PP' ? '' : 'd-none' }}" id="PublicPasswordTextbox">
 										<label for="ContentPassword">{{ __('Password') }}</label>
-										<input type="password" name="data[Blog][password]" class="form-control" id="ContentPassword" placeholder="{{ __('Enter Password') }}" value="{{ old('data.Exhibition.password', $exhibition->password)}}" autocomplete="New-Password">
+										<input type="password" name="data[Exhibition][password]" class="form-control" id="ContentPassword" placeholder="{{ __('Enter Password') }}" value="{{ old('data.Exhibition.password', $exhibition->password)}}" autocomplete="New-Password">
 									</div>
 									<div class="col-md-12 form-group" id="PublicPasswordTextbox">
 										<label for="PublishDateTimeTextbox"><i class="fa fa-calendar"></i> {{ __('Published on:') }}</label>
-										<input type="text" name="data[Blog][publish_on]" class="datetimepicker form-control" id="PublishDateTimeTextbox" value="{{ $exhibition->publish_on ? old('data.Exhibition.publish_on', $exhibition->publish_on) : date('Y-m-d') }}">
+										<input type="text" name="data[Exhibition][publish_on]" class="datetimepicker form-control" id="PublishDateTimeTextbox" value="{{ $exhibition->publish_on ? old('data.Exhibition.publish_on', $exhibition->publish_on) : date('Y-m-d') }}">
 									</div>
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
@@ -345,14 +345,14 @@
 										<a href="javascript:void(0);" rdx-link="{{ route('blog.admin.remove_feature_image', $exhibition->id) }}" class="rdxUpdateAjax btn btn-primary btn-xs rounded-0 me-2" rdx-delete-box="RemoveItemImg_{{ $exhibition->id }}">{{ __('Remove') }}</a>
 										@endif
 										<div class="form-file">
-											<input type="file" class="ps-2 form-control img-input-onchange" name="data[BlogMeta][0][value]" accept=".png, .jpg, .jpeg"  id="BlogMeta0Value" >
+											<input type="file" class="ps-2 form-control img-input-onchange" name="data[ExhibitionMeta][0][value]" accept=".png, .jpg, .jpeg"  id="ExhibitionMeta0Value" >
 										</div>
 									</div>
-									<input type="hidden" name="data[BlogMeta][0][title]" value="ximage" id="ContentMeta0Title">
-									<input type="hidden" name="data[BlogMeta][0][meta_id]" value="{{ isset($ximageMeta->id) ? $ximageMeta->id : 0 }}">
-									<input type="hidden" name="data[BlogMeta][0][old_value]" value="{{ isset($ximageMeta->value) ? $ximageMeta->value : '' }}">
+									<input type="hidden" name="data[ExhibitionMeta][0][title]" value="ximage" id="ContentMeta0Title">
+									<input type="hidden" name="data[ExhibitionMeta][0][meta_id]" value="{{ isset($ximageMeta->id) ? $ximageMeta->id : 0 }}">
+									<input type="hidden" name="data[ExhibitionMeta][0][old_value]" value="{{ isset($ximageMeta->value) ? $ximageMeta->value : '' }}">
 							   	</div>
-								@error('data.BlogMeta.0.value')
+								@error('data.ExhibitionMeta.0.value')
 								  <p class="text-danger">
 								      {{ $message }}
 								  </p>
@@ -371,8 +371,8 @@
 								<span class="accordion-header-indicator"></span>
 							</div>
 							<div class="accordion__body p-4 collapse show" id="with-video" data-bs-parent="#accordion-video">
-								<input type="hidden" name="data[BlogMeta][1][title]" value="xvideo" id="BlogMeta1Title">
-								<input type="text" name="data[BlogMeta][1][value]" class="form-control bootstrap-tagsinput" placeholder="{{ __('Youtube Video Link') }}" id="BlogMeta1Value" value="{{ $xvideo_url }}">
+								<input type="hidden" name="data[ExhibitionMeta][1][title]" value="xvideo" id="ExhibitionMeta1Title">
+								<input type="text" name="data[ExhibitionMeta][1][value]" class="form-control bootstrap-tagsinput" placeholder="{{ __('Youtube Video Link') }}" id="ExhibitionMeta1Value" value="{{ $xvideo_url }}">
 							</div>
 						</div>
 					</div>

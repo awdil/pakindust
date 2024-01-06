@@ -14,7 +14,7 @@
 		</div>
 		<div class="col-sm-6 p-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{ route('catalogue.admin.index') }}">{{ __('Catalogues') }}</a></li>
+				<li class="breadcrumb-item"><a href="{{ route('catalogues.admin.index') }}">{{ __('Catalogues') }}</a></li>
 				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ __('All Catalogues') }}</a></li>
 			</ol>
 		</div>
@@ -44,7 +44,7 @@
                     <span class="accordion-header-indicator"></span>
 				</div>
 				<div class="card-body collapse accordion__body {{ $show }}" id="rounded-search-sec" data-bs-parent="#search-sec-outer">
-					<form action="{{ route('blog.admin.index') }}" method="get">
+					<form action="{{ route('catalogues.admin.index') }}" method="get">
 					@csrf
 						<input type="hidden" name="todo" value="Filter">
 						<div class="row">
@@ -128,8 +128,8 @@
 				<div class="card-header">
 					<h4 class="card-title">{{ __('Catalogues') }}</h4>
 					<div>
-							<a href="{{ route('catalogue.admin.create') }}" class="btn btn-primary">{{ __('Add Catalogues') }}</a>
-							<a href="{{ route('catalogue.admin.index') }}" class="btn btn-primary">{{ __('All Catalogues') }}</a>
+							<a href="{{ route('catalogues.admin.create') }}" class="btn btn-primary">{{ __('Add Catalogues') }}</a>
+							<a href="{{ route('exhibitions.admin.index') }}" class="btn btn-primary">{{ __('All Exhibitions') }}</a>
 					</div>
 				</div>
 				<div class="card-body">
@@ -150,10 +150,7 @@
 							</thead>
 							<tbody>
 								@php
-                                $i = 0;
-                                if(count($catalogues) > 0){
-                                    $i = $catalogues->firstItem();
-                                }
+									$i = $catalogues->firstItem();
 								@endphp
 								@forelse ($catalogues as $page)
 									<tr>
@@ -173,10 +170,10 @@
 										<td> {{ $page->created_at }} </td>
 										<td class="text-center">
 											@can('Controllers > CatalogueController > admin_edit')
-												<a href="{{ route('catalogue.admin.edit', $page->id) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+												<a href="{{ route('catalogues.admin.edit', $page->id) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
 											@endcan
 											{{-- @can('Controllers > CatalogueController > admin_destroy')
-												<a href="{{ route('catalogue.admin.admin_trash_status', $page->id) }}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+												<a href="{{ route('catalogues.admin.admin_trash_status', $page->id) }}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
 											@endcan --}}
 										</td>
 									</tr>

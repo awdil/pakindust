@@ -42,7 +42,7 @@
 		</div>
 	</div>
 
-	<form action="{{ route('catalogue.admin.store') }}" method="post" enctype="multipart/form-data">
+	<form action="{{ route('catalogues.admin.store') }}" method="post" enctype="multipart/form-data">
 		@csrf
 		<div class="row">
 			<div class="col-md-8">
@@ -64,7 +64,7 @@
 										@enderror
 									</div>
 									<div class="form-group col-md-12 ">
-											<textarea name="data[Exhibition][content]" class="form-control W3cmsCkeditor h-auto" id="ExhibitionContent" rows="10">{{ old('data.Catalogue.content') }}</textarea>
+											<textarea name="data[Catalogue][content]" class="form-control W3cmsCkeditor h-auto" id="ExhibitionContent" rows="10">{{ old('data.Catalogue.content') }}</textarea>
 											@error('data.Catalogue.content')
 												<p class="text-danger">
 													{{ $message }}
@@ -84,7 +84,7 @@
 							<div class="accordion__body p-4 collapse show" id="with-excerpt" data-bs-parent="#accordion-excerpt">
 								<div class="form-group">
 									<label for="ContentExcerpt">{{ __('Excerpt') }}</label>
-									<textarea name="data[Exhibition][excerpt]" class="form-control" id="ContentExcerpt" rows="5">{{ old('data.Catalogue.excerpt') }}</textarea>
+									<textarea name="data[Catalogue][excerpt]" class="form-control" id="ContentExcerpt" rows="5">{{ old('data.Catalogue.excerpt') }}</textarea>
 									<small>{{ __('Excerpts are optional hand-crafted summaries of your content that can be used in your theme.') }}</small>
 								</div>
 							</div>
@@ -153,8 +153,8 @@
 							</div>
 							<div class="accordion__body p-4 collapse show" id="with-discussion" data-bs-parent="#accordion-discussion">
 								<div class="form-check mb-2">
-									<input type="hidden" name="data[Exhibition][comment]" id="ContentComment_" value="0">
-									<input type="checkbox" name="data[Exhibition][comment]" class="form-check-input" id="ContentComment" value="1" {{ old('data.Catalogue.comment') == 1 ? 'checked="checked"' : '' }}>
+									<input type="hidden" name="data[Catalogue][comment]" id="ContentComment_" value="0">
+									<input type="checkbox" name="data[Catalogue][comment]" class="form-check-input" id="ContentComment" value="1" {{ old('data.Catalogue.comment') == 1 ? 'checked="checked"' : '' }}>
 									<label class="form-check-label" for="ContentComment">{{ __('Allow comments.') }}</label>
 								</div>
 							</div>
@@ -169,7 +169,7 @@
 							<div class="accordion__body p-4 collapse show" id="with-slug" data-bs-parent="#accordion-slug">
 								<div class="form-group col-md-12">
 									<label for="slug">{{ __('Slug') }}</label>
-									<input type="text" name="data[Exhibition][slug]" class="form-control slug" id="slug" value="{{ old('data.Catalogue.slug') }}">
+									<input type="text" name="data[Catalogue][slug]" class="form-control slug" id="slug" value="{{ old('data.Catalogue.slug') }}">
 								</div>			
 								@error('data.Catalogue.slug')
 									<p class="text-danger">
@@ -188,7 +188,7 @@
 							<div class="accordion__body p-4 collapse show" id="with-author" data-bs-parent="#accordion-author">
 								<div class="form-group">
 									<label for="ContentUserId">{{ __('User') }}</label>
-									<select name="data[Exhibition][user_id]" class="default-select form-control" id="ContentUserId">
+									<select name="data[Catalogue][user_id]" class="default-select form-control" id="ContentUserId">
 										@forelse($users as $user)
 											<option value="{{ $user->id }}" {{ old('data.Catalogue.user_id') == $user->id ? 'selected="selected"' : '' }}>{{ $user->full_name }}</option>
 										@empty
@@ -236,7 +236,7 @@
 								<div class="row">
 									<div class="col-md-12 form-group">
 										<label for="Status"><i class="fa fa-key"></i> {{ __('Status:') }}</label>
-										<select name="data[Exhibition][status]" id="Status" class="default-select form-control">
+										<select name="data[Catalogue][status]" id="Status" class="default-select form-control">
 											<option value="1" {{ old('data.Catalogue.status') == 1 ? 'selected="selected"' : '' }}>{{ __('Published') }}</option>
 											<option value="2" {{ old('data.Catalogue.status') == 2 ? 'selected="selected"' : '' }}>{{ __('Draft') }}</option>
 											<option value="4" {{ old('data.Catalogue.status') == 4 ? 'selected="selected"' : '' }}>{{ __('Private') }}</option>
@@ -245,7 +245,7 @@
 									</div>
 									<div class="col-md-12 form-group">
 										<label for="ContentVisibility"><i class="fa fa-eye"></i> {{ __('Visibility:') }}</label>
-										<select name="data[Exhibition][visibility]" id="ContentVisibility" class="default-select form-control">
+										<select name="data[Catalogue][visibility]" id="ContentVisibility" class="default-select form-control">
 											<option value="Pu" {{ old('data.Catalogue.visibility') == 'Pu' ? 'selected="selected"' : '' }}>{{ __('Public') }}</option>
 											<option value="PP" {{ old('data.Catalogue.visibility') == 'PP' ? 'selected="selected"' : '' }}>{{ __('Password protected') }}</option>
 											<option value="Pr" {{ old('data.Catalogue.visibility') == 'Pr' ? 'selected="selected"' : '' }}>{{ __('Private') }}</option>
@@ -253,15 +253,15 @@
 									</div>
 									<div class="col-md-12 form-group {{ old('data.Catalogue.visibility') == 'PP' ? '' : 'd-none' }}" id="PublicPasswordTextbox">
 										<label for="ContentPassword">{{ __('Password') }}</label>
-										<input type="password" name="data[Exhibition][password]" class="form-control" id="ContentPassword" placeholder="{{ __('Enter Password') }}" value="{{ old('data.Catalogue.password') }}" autocomplete="New-Password">
+										<input type="password" name="data[Catalogue][password]" class="form-control" id="ContentPassword" placeholder="{{ __('Enter Password') }}" value="{{ old('data.Catalogue.password') }}" autocomplete="New-Password">
 									</div>
 									<div class="col-md-12 form-group" id="PublicPasswordTextbox">
 										<label for="PublishDateTimeTextbox"><i class="fa fa-calendar"></i> {{ __('Published on:') }}</label>
-										<input type="text" name="data[Exhibition][publish_on]" class="datetimepicker form-control" id="PublishDateTimeTextbox" value="{{ old('data.Catalogue.publish_on', date('Y-m-d')) }}">
+										<input type="text" name="data[Catalogue][publish_on]" class="datetimepicker form-control" id="PublishDateTimeTextbox" value="{{ old('data.Catalogue.publish_on', date('Y-m-d')) }}">
 									</div>
 									<div class="col-md-12 form-group">
 										<label for=""><i class="fa fa-calendar"></i> {{ __('Year') }}</label>
-										<select name="data[Exhibition][year]" id="year" class="default-select form-control">
+										<select name="data[Catalogue][year]" id="year" class="default-select form-control">
 											@foreach(DzHelper::getYearsList() as $year)
 											<option value="{{ $year }}" {{ old('year') == $year ? 'selected="selected"' : '' }}>{{ $year }}</option>
 											@endforeach

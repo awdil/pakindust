@@ -76,35 +76,55 @@ $dateRange = new DatePeriod($startDate, new DateInterval('P1D'), $endDate);
         </div>
         <div class="routine-content">
             <!-- In the pages i need to add flage if this page belongs to routine then we will show the relvent data for tlast 4 rotutine of each event -->
+            <?php  
+                $data1 = DzHelper::getConfigDataByName('Home.firstroutineDetail');
+                $url1= route('configuration.publicImagePreview', ['id' => $data1->id]);
+                $data2 = DzHelper::getConfigDataByName('Home.secondroutineDetail');
+                $url2= route('configuration.publicImagePreview', ['id' => $data2->id]);
+                $data3 = DzHelper::getConfigDataByName('Home.thirdroutineDetail');
+                $url3= route('configuration.publicImagePreview', ['id' => $data3->id]);
+                $data4 = DzHelper::getConfigDataByName('Home.fourthroutineDetail');
+                $url4= route('configuration.publicImagePreview', ['id' => $data4->id]);
+               
+                $routineData1 = unserialize($data1->params);
+                $routineData2 = unserialize($data2->params);
+                $routineData3 = unserialize($data3->params);
+                $routineData4 = unserialize($data4->params);
+
+            ?>
+            
             <div class="routine-detail">
+                
+                
                 <div class="time-detail">
-                    <span class="time-title">10:00 AM to 11:30 AM</span>
-                    <h6 class="subject-title">Exhibition Inauguration</h6>
+                    <span class="time-title">{{ $routineData1['time'] }}</span>
+                    <h6 class="subject-title">{{ $routineData1['subjectTitle'] }}</h6>
                 </div>
                 <div class="routine-description">
-                    <h5 class="chapter-title">Grand Opening Ceremony</h5>
+                    <h5 class="chapter-title">{{ $routineData1['chapterTitle'] }}</h5>
                     <p class="ch-paragraph">
-                        Join us for the grand inauguration of Pakindustrial Expo. Explore a diverse range of industrial products and services showcased by leading companies. This ceremony marks the beginning of an exciting exhibition experience.
+                    {{ $routineData1['paragraph'] }}
                     </p>
                     <span class="chapter-link">
                         <a href="#">EXPLORE EXHIBITORS</a>
                     </span>
                 </div>
+                
                 <div class="lecture-image">
                     <figure class="">
-                        <img src="{{theme_asset('img/expo-opening.jpg')}}" alt="Exhibition Inauguration">
+                        <img src="{{ asset($url1) }}" alt="Exhibition Inauguration">
                     </figure>
                 </div>
             </div>
             <div class="routine-detail">
                 <div class="time-detail">
-                    <span class="time-title">12:00 PM to 01:30 PM</span>
-                    <h6 class="subject-title">Industry Trends Seminar</h6>
+                    <span class="time-title">{{ $routineData2['time'] }}</span>
+                    <h6 class="subject-title">{{ $routineData2['subjectTitle'] }}</h6>
                 </div>
                 <div class="routine-description">
-                    <h5 class="chapter-title">Navigating Future Challenges</h5>
+                    <h5 class="chapter-title">{{ $routineData2['chapterTitle'] }}</h5>
                     <p class="ch-paragraph">
-                        Dive into an insightful seminar on current industry trends and future challenges. Industry experts will share their perspectives on navigating the dynamic landscape of industrial development.
+                    {{ $routineData2['paragraph'] }}
                     </p>
                     <span class="chapter-link">
                         <a href="#">VIEW SEMINAR DETAILS</a>
@@ -112,19 +132,19 @@ $dateRange = new DatePeriod($startDate, new DateInterval('P1D'), $endDate);
                 </div>
                 <div class="lecture-image">
                     <figure class="">
-                        <img src="{{theme_asset('img/industry-seminar.jpg')}}" alt="Industry Trends Seminar">
+                        <img src="{{ asset($url2) }}" alt="Industry Trends Seminar">
                     </figure>
                 </div>
             </div>
             <div class="routine-detail">
                 <div class="time-detail">
-                    <span class="time-title">02:00 PM to 03:30 PM</span>
-                    <h6 class="subject-title">Networking Session</h6>
+                    <span class="time-title">{{ $routineData3['time'] }}</span>
+                    <h6 class="subject-title">{{ $routineData3['subjectTitle'] }}</h6>
                 </div>
                 <div class="routine-description">
-                    <h5 class="chapter-title">Connect with Industry Leaders</h5>
+                    <h5 class="chapter-title">{{ $routineData3['chapterTitle'] }}</h5>
                     <p class="ch-paragraph">
-                        Engage in a networking session with key industry leaders and potential business partners. Build valuable connections and explore collaborative opportunities within the industrial sector.
+                    {{ $routineData3['paragraph'] }}
                     </p>
                     <span class="chapter-link">
                         <a href="#">NETWORKING OPPORTUNITIES</a>
@@ -132,19 +152,19 @@ $dateRange = new DatePeriod($startDate, new DateInterval('P1D'), $endDate);
                 </div>
                 <div class="lecture-image">
                     <figure class="">
-                        <img src="{{theme_asset('img/networking-session.jpg')}}" alt="Networking Session">
+                        <img src="{{ asset($url3) }}" alt="Networking Session">
                     </figure>
                 </div>
             </div>
             <div class="routine-detail">
                 <div class="time-detail">
-                    <span class="time-title">04:00 PM to 05:30 PM</span>
-                    <h6 class="subject-title">Product Showcase</h6>
+                    <span class="time-title">{{ $routineData4['time'] }}</span>
+                    <h6 class="subject-title">{{ $routineData4['subjectTitle'] }}</h6>
                 </div>
                 <div class="routine-description">
-                    <h5 class="chapter-title">Innovative Industrial Solutions</h5>
+                    <h5 class="chapter-title">{{ $routineData4['chapterTitle'] }}</h5>
                     <p class="ch-paragraph">
-                        Witness a diverse array of industrial products and solutions in our exclusive product showcase. Explore innovations that are shaping the future of the industrial landscape.
+                    {{ $routineData4['paragraph'] }}
                     </p>
                     <span class="chapter-link">
                         <a href="#">EXPLORE PRODUCTS</a>
@@ -152,7 +172,7 @@ $dateRange = new DatePeriod($startDate, new DateInterval('P1D'), $endDate);
                 </div>
                 <div class="lecture-image">
                     <figure class="">
-                        <img src="{{theme_asset('img/product-showcase.jpg')}}" alt="Product Showcase">
+                        <img src="{{ asset($url4) }}" alt="Product Showcase">
                     </figure>
                 </div>
             </div>
