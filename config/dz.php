@@ -115,6 +115,17 @@ return [
 					'css/bootstrap-tagsinput.css'
 				],
 
+				'ExhibitionsController_admin_create' => [
+					'vendor/pickadate/themes/default.css',
+					'vendor/pickadate/themes/default.date.css',
+					'css/bootstrap-tagsinput.css'
+				],
+				'ExhibitionsController_admin_edit' => [
+					'vendor/pickadate/themes/default.css',
+					'vendor/pickadate/themes/default.date.css',
+					'css/bootstrap-tagsinput.css'
+				],
+
 				'BlogCategoriesController_admin_index' => [
 				],
 				'BlogCategoriesController_admin_create' => [
@@ -213,6 +224,23 @@ return [
 					'js/bootstrap-tagsinput.min.js',
 				],
 				'BlogsController_admin_edit' => [
+					'vendor/ckeditor/ckeditor.js',
+					'vendor/pickadate/picker.js',
+					'vendor/pickadate/picker.date.js',
+					'js/jquery-slug-min.js',
+					'js/blogs-min.js',
+					'js/bootstrap-tagsinput.min.js',
+				],
+
+				'ExhibitionsController_admin_create' => [
+					'vendor/ckeditor/ckeditor.js',
+					'vendor/pickadate/picker.js',
+					'vendor/pickadate/picker.date.js',
+					'js/jquery-slug-min.js',
+					'js/blogs-min.js',
+					'js/bootstrap-tagsinput.min.js',
+				],
+				'ExhibitionsController_admin_edit' => [
 					'vendor/ckeditor/ckeditor.js',
 					'vendor/pickadate/picker.js',
 					'vendor/pickadate/picker.date.js',

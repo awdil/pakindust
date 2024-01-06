@@ -97,6 +97,7 @@ class ExhibitionsController extends Controller
         $categoryArr = (new BlogCategory())->generateCategoryTreeListCheckbox(Null, ' ');
         $parentCategoryArr = (new BlogCategory())->generateCategoryTreeArray(Null, '&nbsp;&nbsp;&nbsp;');
         $screenOption = config('exhibition.ScreenOption');
+        
         //dd($screenOption);
         return view('admin.exhibitions.create', compact('users', 'exhibitions', 'categoryArr', 'parentCategoryArr', 'page_title', 'screenOption'));
     }
