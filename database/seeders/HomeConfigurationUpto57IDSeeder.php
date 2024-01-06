@@ -116,38 +116,72 @@ class HomeConfigurationUpto57IDSeeder extends Seeder
 
     function defaultEventData()
     {
+        // $eventData = [
+        //     1 => [
+        //         'icon' => 'icon-communication',
+        //         'heading' => 'IN PERSON NETWORKING',
+        //         'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+        //     ],
+        //     2 => [
+        //         'icon' => 'icon-idea_generate',
+        //         'heading' => 'BOOST CREATIVITY',
+        //         'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+        //     ],
+        //     3 => [
+        //         'icon' => 'icon-drink',
+        //         'heading' => 'AFTER PARTY EVENT',
+        //         'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+        //     ],
+        //     4 => [
+        //         'icon' => 'icon-brain',
+        //         'heading' => 'SPARK CREATIVITY',
+        //         'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+        //     ],
+        //     5 => [
+        //         'icon' => 'icon-badge',
+        //         'heading' => 'TOP SPEAKERS',
+        //         'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+        //     ],
+        //     6 => [
+        //         'icon' => 'icon-team2',
+        //         'heading' => 'POTENTIAL CLIENTS',
+        //         'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+        //     ],
+        // ];
+
         $eventData = [
             1 => [
                 'icon' => 'icon-communication',
-                'heading' => 'IN PERSON NETWORKING',
-                'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+                'heading' => 'IN-PERSON NETWORKING',
+                'description' => 'Connect with industry professionals in our exclusive in-person networking sessions. Explore opportunities, build relationships, and expand your business network.',
             ],
             2 => [
                 'icon' => 'icon-idea_generate',
                 'heading' => 'BOOST CREATIVITY',
-                'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+                'description' => 'Ignite your creative spark with engaging workshops and interactive sessions designed to boost creativity. Discover innovative ideas and strategies to apply in your work.',
             ],
             3 => [
                 'icon' => 'icon-drink',
-                'heading' => 'AFTER PARTY EVENT',
-                'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+                'heading' => 'NETWORKING GALA',
+                'description' => 'Join us at the Networking Gala during Everest International Expo. Connect with industry leaders, government officials, and fellow exhibitors in a festive atmosphere.',
             ],
             4 => [
                 'icon' => 'icon-brain',
                 'heading' => 'SPARK CREATIVITY',
-                'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+                'description' => 'Immerse yourself in a world of creativity and innovation. Participate in hands-on activities, brainstorming sessions, and discussions to spark new ideas.',
             ],
             5 => [
                 'icon' => 'icon-badge',
                 'heading' => 'TOP SPEAKERS',
-                'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+                'description' => 'Listen to industry experts and thought leaders as they share valuable insights and experiences. Gain knowledge from the best in the business.',
             ],
             6 => [
                 'icon' => 'icon-team2',
                 'heading' => 'POTENTIAL CLIENTS',
-                'description' => 'Nemo cubilia non, exercitationem ridiculus modi faucibus nullam animi suspendie in porttitor.',
+                'description' => 'Discover potential clients and business opportunities. Our expo provides a platform for networking and building relationships with potential clients and collaborators.',
             ],
         ];
+        
         
         $serializedData = serialize($eventData);
         return $serializedData;

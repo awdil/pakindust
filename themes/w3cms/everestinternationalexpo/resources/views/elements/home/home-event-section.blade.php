@@ -1,6 +1,11 @@
 <!-- home event section html start -->
+<?php
+//dd(DzHelper::getConfigDataByName('Site.banner_background')->id);
+//$result = DzHelper::getConfigDataByName('Site.banner_background');
+$url= route('configuration.publicImagePreview', ['id' => DzHelper::getConfigDataByName('Home.eventSection')->id]);
+?>
 <?php $eventServicesData = unserialize(config('Home.eventServices')); ?>
-<section class="home-event-section">
+<section class="home-event-section" style="background-image: url('{{ asset($url) }}');">
     <div class="overlay"></div>
     <div class="container">
         <div class="section-head-white text-center col-lg-8 offset-lg-2">

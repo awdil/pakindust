@@ -10802,4 +10802,8 @@ product slider range for price css
   margin-top: 20px;
 }
 
+.filter-brightnes-two{
+  filter: brightness(2);
+}
+
 /*# sourceMappingURL=style.css.map */

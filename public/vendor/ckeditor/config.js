@@ -7,10 +7,15 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	//config.language = 'fr';
 	// config.uiColor = '#AADC6E';
+	//config.uiColor = '#FFDC6E';
+    //config.skin = 'v2';
 	config.removePlugins= 'stylesheetparser';
 	config.allowedContent=true;
 	config.extraAllowedContent= '*(*)';
 	config.toolbarCanCollapse= true;
+	// Enable file uploads
+    config.filebrowserUploadUrl = '/upload-handler.php?type=Files';
+
 	config.toolbar = [
 	    { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
 	    { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
