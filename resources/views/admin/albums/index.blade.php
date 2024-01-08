@@ -8,14 +8,14 @@
 	<div class="row page-titles mx-0 mb-3">
 		<div class="col-sm-6 p-0">
 			<div class="welcome-text">
-				<h4>{{ __('Exhibitions') }}</h4>
-				<span>{{ __('All exhibitions list') }}</span>
+				<h4>{{ __('Albums') }}</h4>
+				<span>{{ __('All albums list') }}</span>
 			</div>
 		</div>
 		<div class="col-sm-6 p-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{ route('exhibitions.admin.index') }}">{{ __('Exhibitions') }}</a></li>
-				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ __('All Exhibitions') }}</a></li>
+				<li class="breadcrumb-item"><a href="{{ route('albums.admin.index') }}">{{ __('Albums') }}</a></li>
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ __('All Albums') }}</a></li>
 			</ol>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 			<div class="card accordion accordion-rounded-stylish accordion-bordered" id="search-sec-outer">
 				<div class="accordion-header rounded-lg {{ $collapsed }}" data-bs-toggle="collapse" data-bs-target="#rounded-search-sec">
 					<span class="accordion-header-icon"></span>
-                    <h4 class="accordion-header-text m-0">{{ __('Search Exhibitions') }}</h4>
+                    <h4 class="accordion-header-text m-0">{{ __('Search Album') }}</h4>
                     <span class="accordion-header-indicator"></span>
 				</div>
 				<div class="card-body collapse accordion__body {{ $show }}" id="rounded-search-sec" data-bs-parent="#search-sec-outer">
@@ -126,14 +126,12 @@
 		<div class="col-xl-12">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="card-title">{{ __('Exhibitions') }}</h4>
+					<h4 class="card-title">{{ __('Album') }}</h4>
 					<div>
 						@can('Controllers > ExhibitionsController > admin_create')
-							<a href="{{ route('exhibitions.admin.create') }}" class="btn btn-primary">{{ __('Add Exhibitions') }}</a>
+							<a href="{{ route('albums.admin.create') }}" class="btn btn-primary">{{ __('Add Albums') }}</a>
 						@endcan
-						@can('Controllers > BlogCategoriesController > admin_index')
-							<a href="{{ route('blog_category.admin.index') }}" class="btn btn-primary">{{ __('All Exhibition Catalogues') }}</a>
-						@endcan
+						
 						<a href="{{ route('exhibitions.admin.trash_list') }}" class="btn btn-primary">{{ __('Trashed Exhibitions') }}</a>
 					</div>
 				</div>
@@ -144,9 +142,7 @@
 								<tr>
 									<th> <strong> {{ __('S.N.') }} </strong> </th>
 									<th> <strong> {!! DzHelper::dzSortable('title', __('Title')) !!} </strong> </th>
-									<th> <strong> {!! DzHelper::dzSortable('name.users', __('Author')) !!} </strong> </th>
-									<th> <strong> {!! DzHelper::dzSortable('status', __('Status')) !!} </strong> </th>
-									<th> <strong> {!! DzHelper::dzSortable('visibility', __('Visibility')) !!} </strong> </th>
+									
 									<th> <strong> {!! DzHelper::dzSortable('created_at', __('Created')) !!} </strong> </th>
 									@canany(['Controllers > ExhibitionsController > admin_edit', 'Controllers > ExhibitionsController > admin_destroy'])
 										<th class="text-center"> <strong> {{ __('Actions') }} </strong> </th>
@@ -155,30 +151,20 @@
 							</thead>
 							<tbody>
 								@php
-									$i = $exhibitions->firstItem();
+									$i = $albums->firstItem();
 								@endphp
-								@forelse ($exhibitions as $page)
+								@forelse ($albums as $page)
 									<tr>
 										<td> {{ $i++ }} </td>
 										<td> {{ Str::limit($page->title, 30, ' ...') }} </td>
-										<td> {{ $page->user_name }} </td>
-										<td> {{ $status[$page->status] }} </td>
-										<td> 
-											@if ($page->visibility == 'Pr')
-												<span class="badge badge-danger">{{ __('Private') }}</span>
-											@elseif($page->visibility == 'PP')
-												<span class="badge badge-warning">{{ __('Password Protected') }}</span>
-											@else
-												<span class="badge badge-success">{{ __('Public') }}</span>
-											@endif
-										</td>
+										
 										<td> {{ $page->created_at }} </td>
 										<td class="text-center">
 											@can('Controllers > ExhibitionsController > admin_edit')
-												<a href="{{ route('exhibitions.admin.edit', $page->id) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+												<a href="{{ route('albums.admin.edit', $page->id) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
 											@endcan
 											@can('Controllers > ExhibitionsController > admin_destroy')
-												<a href="{{ route('exhibitions.admin.admin_trash_status', $page->id) }}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+												<a href="{{ route('albums.admin.admin_trash_status', $page->id) }}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
 											@endcan
 										</td>
 									</tr>
@@ -191,7 +177,7 @@
 					</div>
 				</div>
 				<div class="card-footer">
-                    {{ $exhibitions->onEachSide(2)->appends(Request::input())->links() }}
+                    {{ $albums->onEachSide(2)->appends(Request::input())->links() }}
 				</div>
 			</div>
 		</div>

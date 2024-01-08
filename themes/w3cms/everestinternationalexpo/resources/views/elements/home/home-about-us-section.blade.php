@@ -1,5 +1,10 @@
 
 <!-- home about us section -->
+<?php
+$data=DzHelper::getConfigDataByName('Home.aboutRightContent');
+$unserializeData=unserialize($data->params);
+// dd($unserializeData);
+?>
 <section class="home-aboutus">
 	<div class="container">
 		<div class="home-aboutus-inner">
@@ -20,12 +25,12 @@
 						<img src="{{theme_asset('img/eventum-img36.jpg')}}" alt="">
 					</figure>
 					<div class="section-head">
-						<span class="section-sub-title ">INTRODUCTION</span>
+						<span class="section-sub-title ">{{config('Home.aboutRightContent')}}</span>
 						<h3 class="section-title">
-							KNOW MORE ABOUT PAKISTAN INDUSTTRIAL EXPO
+						{{$unserializeData['sectionTitle']}}
 						</h3>
 						<p class="section-paragraph">
-						Everest International Expo (Pvt.) Ltd, based in Pakistan, is a renowned expo company known for precise match-making services. Leveraging abundant resources, it ensures exhibitors benefit beyond the exhibition, earning global recognition for professionalism and quality.
+						{{$unserializeData['sectionParagraph']}}
 						</p>
 					</div>
 				</div>
@@ -39,13 +44,13 @@
 								<li>
 									<i aria-hidden="true" class="icon icon-checkmark-circle"></i>
 									<span>
-									Everest provides accurate match-making services for exhibitors, ensuring a comprehensive and beneficial experience for each participant.
+									{{$unserializeData['aboutFirstlist']}}
 									</span>
 								</li>
 								<li>
 									<i aria-hidden="true" class="icon icon-checkmark-circle"></i>
 									<span>
-									The company leverages the abundant resources in Pakistan, offering exhibitors services that go beyond the exhibition itself.
+									{{$unserializeData['aboutSecondtlist']}}
 									</span>
 								</li>
 							</ul>

@@ -22,4 +22,5 @@ require __DIR__.'/exhibition.php';
 require __DIR__.'/catalogue.php';
 require __DIR__.'/menu.php';
 require __DIR__.'/tools.php';
+require __DIR__.'/albums.php';
 require __DIR__.'/configuration.php';

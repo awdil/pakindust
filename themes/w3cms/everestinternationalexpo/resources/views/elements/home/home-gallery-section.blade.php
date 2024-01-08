@@ -1,19 +1,24 @@
 <!-- home gallery section html start -->
+<?php
+$data=DzHelper::getConfigDataByName('Home.eventGallery');
+$unserializeData=unserialize($data->params);
+$galleryCount = ($unserializeData['galleryCount'])?$unserializeData['galleryCount']:8;
+?>
 <section class="home-gallery">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="section-head">
-                    <span class="section-sub-title ">EVENT GALLERY</span>
+                    <span class="section-sub-title ">{{ config('Home.eventGallery') }}</span>
                     <h3 class="section-title">
-                    A GLIMPSE OF OUR PAST YEAR'S MEMORABLE MOMENTS!
+                    {{$unserializeData['sectionTitle']}}
                     </h3>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="section-head">
                     <p class="section-paragraph">
-                    Explore the captivating visuals that encapsulate the essence of our previous events. Immerse yourself in the vibrant images showcasing the excitement, innovation, and unforgettable experiences from our past gatherings.
+                    {{$unserializeData['sectionParagraph']}}
                     </p>
                 </div>
             </div>

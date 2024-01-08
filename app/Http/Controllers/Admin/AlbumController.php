@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Album;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,11 @@ class AlbumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function admin_index()
     {
-        $albums = Album::all();
+        //$albums = Album::all();
+        $resultQuery = Album::query();
+        $albums = $resultQuery->paginate(config('Reading.nodes_per_page'));
         //return view('albums.index', compact('albums'));
         return view('admin.albums.index',compact('albums'));
     }
@@ -24,9 +27,10 @@ class AlbumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function admin_create()
     {
-        return view('albums.create');
+        $screenOption = config('exhibition.ScreenOption');
+        return view('admin.albums.create',compact('screenOption'));
     }
 
     /**
@@ -35,12 +39,20 @@ class AlbumController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function admin_store(Request $request)
     {
-        Album::create([
-            'title' => $request->title
-        ]);
-        return redirect()->route('albums.index');
+        $data =$request->input('data');
+        
+        if ($request->has('image')) {
+            $album = Album::create([
+                'title' => $data['Album']['title']
+            ]);
+        
+            $album->addMedia($request->image)->toMediaCollection();
+            return redirect()->route('albums.admin.index')->with('success', __('Added successfully.'));
+        }
+    
+        return redirect()->back()->with('error', __('Something went wrong. Please try again.'));
     }
 
     /**
@@ -49,7 +61,7 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Album $album)
+    public function admin_show(Album $album)
     {
         $photos = $album->getMedia();
         return view('albums.show', compact('album', 'photos'));
@@ -61,9 +73,16 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Album $album)
+    public function admin_edit($album)
     {
-        return view('albums.edit', compact('album'));
+        //dd($album);
+        $album = Album::findorFail($album);
+        //dd($album->getMedia());
+        
+        $image = $album->getMedia();
+        //$image = $image[0];
+        //$screenOption = config('exhibition.ScreenOption');
+        return view('admin.albums.edit', compact('album', 'image', 'screenOption'));
     }
 
     /**
@@ -73,7 +92,7 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Album $album)
+    public function admin_update(Request $request, Album $album)
     {
         $album->update([
             'title' => $request->title
@@ -87,14 +106,14 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Album $album)
+    public function admin_destroy(Album $album)
     {
         $album->delete();
 
         return redirect()->back();
     }
 
-    public function upload(Request $request, Album $album)
+    public function admin_upload(Request $request, Album $album)
     {
         if ($request->has('image')) {
             $album->addMedia($request->image)->toMediaCollection();
@@ -102,7 +121,7 @@ class AlbumController extends Controller
         return redirect()->back();
     }
 
-    public function showImage(Album $album, $id)
+    public function admin_showImage(Album $album, $id)
     {
         $media = $album->getMedia();
         $image = $media->where('id', $id)->first();
@@ -110,7 +129,7 @@ class AlbumController extends Controller
         return view('albums.image-show', compact('album', 'image'));
     }
 
-    public function destroyImage(Album $album, $id)
+    public function admin_destroyImage(Album $album, $id)
     {
         $media = $album->getMedia();
         $image = $media->where('id', $id)->first();

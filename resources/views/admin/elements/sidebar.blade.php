@@ -91,7 +91,9 @@
                     @can('Controllers > BlogsController > admin_index')
                         <li><a href="{{ route('exhibitions.admin.index') }}">{{ __('Add New Product') }}</a></li>
                     @endcan
-                    
+                    @can('Controllers > AlbumController > admin_index')
+                        <li><a href="{{ route('albums.admin.index') }}">{{ __('Album') }}</a></li>
+                    @endcan
                 </ul>
             </li>
             @endcanany

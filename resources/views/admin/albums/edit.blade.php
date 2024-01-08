@@ -5,44 +5,24 @@
 @section('content')
 
 <div class="container-fluid">
-	<div class="card accordion accordion-rounded-stylish accordion-bordered" id="accordion-slug">
-		<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-slug" aria-expanded="true">
-			<h4 class="card-title">{{ __('Screen Options') }}</h4>
-			<span class="accordion-header-indicator"></span>
-		</div>
-		<div class="accordion__body p-4 collapse show" id="with-slug" data-bs-parent="#accordion-slug">
-			<div class="row">
-				@if(!empty($screenOption)) 
-					@forelse($screenOption as $key => $value)
-						<div class="col-md-2 form-group">
-							<label class="checkbox-inline">
-								<input type="checkbox" id="Allow{{ $key }}" class="me-1 m-0 form-check-input allowField Allow{{ $key }}" rel="{{ $key }}" {{ $value['visibility'] ? 'checked="checked"' : '' }}>
-								{{ $key }}
-							</label>
-						</div>
-					@empty
-					@endforelse
-				@endif
-			</div>
-		</div>
-	</div>
+	
 
 	<div class="row page-titles mx-0">
 		<div class="col-sm-6 p-0">
 			<div class="welcome-text">
-				<h4>{{ __('Exhibitions') }}</h4>
-				<span>{{ __('Edit Exhibition') }}</span>
+				<h4>{{ __('Albums') }}</h4>
+				<span>{{ __('Edit Album') }}</span>
 			</div>
 		</div>
 		<div class="col-sm-6 p-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{ route('exhibitions.admin.index') }}">{{ __('Exhibitions') }}</a></li>
-				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ __('Edit Exhibitions') }}</a></li>
+				<li class="breadcrumb-item"><a href="{{ route('albums.admin.index') }}">{{ __('Albums') }}</a></li>
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ __('Edit Albums') }}</a></li>
 			</ol>
 		</div>
 	</div>
 
-	<form action="{{ route('exhibitions.admin.update', $exhibition->id) }}" method="post" enctype="multipart/form-data">
+	<form action="{{ route('albums.admin.update', $album->id) }}" method="post" enctype="multipart/form-data">
 		@csrf
 		<div class="row">
 			<div class="col-md-8">
@@ -50,187 +30,40 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h4 class="card-title">{{ __('Edit Exhibition') }}</h4>
+								<h4 class="card-title">{{ __('Edit Album') }}</h4>
 							</div>
 							<div class="card-body p-4">
 								<div class="row">
 									<div class="form-group col-md-12">
 										<label for="BlogTitle">{{ __('Title') }}</label>
-										<input type="text" name="data[Exhibition][title]" class="form-control" id="BlogTitle" placeholder="{{ __('Title') }}" value="{{ old('data.Exhibition.title', $exhibition->title) }}">
-										@error('data.Exhibition.title')
+										<input type="text" name="data[Album][title]" class="form-control" id="BlogTitle" placeholder="{{ __('Title') }}" value="{{ old('data.Album.title', $album->title) }}">
+										@error('data.Album.title')
 											<p class="text-danger">
 												{{ $message }}
 											</p>
 										@enderror
 									</div>
 
-									<div class="form-group col-md-12">
-										<strong>{{ __('Permalink:') }}</strong>
-										<a href="{!! DzHelper::laraBlogLink($exhibition->id) !!}">
-											{{ url('/') }}/<span class='font-green permalinkSlugSpan'>{{ $exhibition->slug }}</span>
-										</a>
-										<div class="editPermalinkContainer">
-											<input type="text" name="data[Exhibition][editslug]" id="BlogEditSlug" class="form-control" value="{{ $exhibition->slug }}">
-											<button type="button" class="btn btn-link btn-sm editPermalinkOkButton">{{ __('OK') }}</button>
-											<a href="javascript:void(0);" class="editPermalinkCancelButton">{{ __('Cancel') }}</a>
-										</div>
-										<button type="button" class="btn btn-link btn-sm editPermalink" title="{{ __('Click here to edit the URL') }}">{{ __('Edit') }}</button>
+									<div class="container mx-auto flex justify-between m-2 p-2 bg-white shadow-md rounded-lg">
+									<div class="m-2 p-2">
+										<img src="{{ $image->getUrl() }}">
 									</div>
-									<div class="form-group col-md-12">
-										<textarea name="data[Exhibition][content]" class="form-control W3cmsCkeditor h-auto" id="BlogContent" rows="10">{{ old('data.Exhibition.content', $exhibition->content) }}</textarea>
-										@error('data.Exhibition.content')
-											<p class="text-danger">
-												{{ $message }}
-											</p>
-										@enderror
+									<div class="m-2 p-2">
+										<ul>
+											<li>Collection Name: {{ $image->collection_name }}</li>
+											<li>Name: {{ $image->name }}</li>
+											<li>Mime type: {{ $image->mime_type }}</li>
+											<li>Size: {{ $image->human_readable_size }}</li>
+										</ul>
 									</div>
+								</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12">
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XExcerpt {{ $screenOption['Excerpt']['visibility'] ? '' : 'd-none' }}" id="accordion-excerpt">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-excerpt" aria-expanded="true">
-								<h4 class="card-title">{{ __('Excerpt') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show" id="with-excerpt" data-bs-parent="#accordion-excerpt">
-								<div class="form-group">
-									<label for="ContentExcerpt">{{ __('Excerpt') }}</label>
-									<textarea name="data[Exhibition][excerpt]" class="form-control mb-1" id="ContentExcerpt" rows="5">{{ old('data.Exhibition.excerpt', $exhibition->excerpt) }}</textarea>
-									<small>{{ __('Excerpts are optional hand-crafted summaries of your content that can be used in your theme.') }}</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XCustomFields {{ $screenOption['CustomFields']['visibility'] ? '' : 'd-none' }}" id="accordion-custom-fields">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-custom-fields" aria-expanded="true">
-								<h4 class="card-title">{{ __('Custom Fields') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show" id="with-custom-fields" data-bs-parent="#accordion-custom-fields">
-								<div id="AppendContainer">
-									@php
-										$count = 1;
-										$custom_fields = old('data.ExhibitionMeta') ? old('data.ExhibitionMeta') : $exhibition->blog_meta;
-									@endphp
-									@if(!empty($custom_fields))
-										<div id="customFieldContainer">
-											@foreach($custom_fields as $custom_field)
-												@if($custom_field['title'] == 'ximage' || $custom_field['title'] == 'xvideo')
-													@continue
-												@endif
-												@php
-													$count++;
-												@endphp
-												<div class="row xrow mb-2">
-													<div class="form-group col-md-6">
-														<label for="ExhibitionMetaName_{{ $count }}">{{ __('Title') }}</label> 
-														<input type="text" name="data[ExhibitionMeta][{{ $count }}][title]" class="form-control" id="ExhibitionMetaName_{{ $count }}" value="{{ $custom_field['title'] }}"> 
-													</div> 
-													<div class="col-md-6 form-group"> 
-														<label for="ExhibitionMetaValue_{{ $count }}">{{ __('Value') }}</label> 
-														<textarea name="data[ExhibitionMeta][{{ $count }}][value]" id="ExhibitionMetaValue_{{ $count }}" class="form-control" rows="5">{{ $custom_field['value'] }}</textarea> 
-													</div> 
-												</div>
-											@endforeach
-										</div>
-									@endif
-									<input type="hidden" id="last_cf_num" value="{{ $count }}">
-								</div>
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<label for="ExhibitionMetaName">{{ __('Title') }}</label>
-										<input type="text" class="form-control" id="ExhibitionMetaName" placeholder="{{ __('Title') }}">
-									</div>
-									<div class="col-md-6 form-group">
-										<label for="ExhibitionMetaValue">{{ __('Value') }}</label>
-										<textarea class="form-control" id="ExhibitionMetaValue" rows="5"></textarea>
-									</div>
-								</div>
-								<button type="button" class="btn btn-primary btn-sm" id="AddCustomField">{{ __('Add Custom Field') }}</button>
-								<small class="d-block mt-2">{{ __('Custom fields can be used to extra metadata to a post that you can use in your theme.') }}</small>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XDiscussion {{ $screenOption['Discussion']['visibility'] ? '' : 'd-none' }}" id="accordion-discussion">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-discussion" aria-expanded="true">
-								<h4 class="card-title">{{ __('Discussion') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show" id="with-discussion" data-bs-parent="#accordion-discussion">
-								<div class="form-check mb-2">
-									<input type="hidden" name="data[Exhibition][comment]" id="ContentComment_" value="0">
-									<input type="checkbox" name="data[Exhibition][comment]" class="form-check-input" id="ContentComment" value="1" {{ old('data.Exhibition.comment', $exhibition->comment) == '1' ? 'checked' : '' }}>
-									<label class="form-check-label" for="ContentComment">{{ __('Allow comments.') }}</label>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XSlug {{ $screenOption['Slug']['visibility'] ? '' : 'd-none' }}" id="accordion-slug">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-slug" aria-expanded="true">
-								<h4 class="card-title">{{ __('Slug') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show" id="with-slug" data-bs-parent="#accordion-slug">
-								<div class="form-group">
-									<label for="slug">{{ __('Slug') }}</label>
-									<input type="text" name="data[Exhibition][slug]" class="form-control slug" id="slug" value="{{ old('data.Exhibition.slug', $exhibition->slug) }}" disabled="disabled">
-									@error('data.Exhibition.slug')
-										<p class="text-danger">
-											{{ $message }}
-										</p>
-									@enderror
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XAuthor {{ $screenOption['Author']['visibility'] ? '' : 'd-none' }}" id="accordion-author">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-author" aria-expanded="true">
-								<h4 class="card-title">{{ __('Author') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show" id="with-author" data-bs-parent="#accordion-author">
-								<div class="form-group">
-									<label for="ContentUserId">{{ __('User') }}</label>
-									<select name="data[Exhibition][user_id]" class="default-select form-control" id="ContentUserId">
-										@forelse($users as $user)
-											<option value="{{ $user->id }}" {{ old('data.Exhibition.user_id', $exhibition->user_id) == $user->id ? 'selected="selected"' : '' }}>{{ $user->full_name }}</option>
-										@empty
-										@endforelse
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XSeo {{ $screenOption['Seo']['visibility'] ? '' : 'd-none' }}" id="accordion-seo">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-seo" aria-expanded="true">
-								<h4 class="card-title">{{ __('Seo') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show" id="with-seo" data-bs-parent="#accordion-seo">
-								<div class="row">
-									<div class="col-md-12 form-group">
-										<label for="ContentSeoBlogTitle">{{ __('Blog Title') }}</label>
-										<input type="text" name="data[BlogSeo][page_title]" class="form-control" id="ContentSeoBlogTitle" placeholder="{{ __('Blog Title') }}" maxlength="255" value="{{ old('data.BlogSeo.page_title', optional($exhibition->blog_seo)->page_title) }}">
-									</div>
-									<div class=" form-group col-md-6">
-										<label for="ContentSeoMetaKeywords">{{ __('Keywords') }}</label>
-										<input type="text" name="data[BlogSeo][meta_keywords]" class="form-control" id="ContentSeoMetaKeywords" placeholder="{{ __('Enter meta keywords') }}" maxlength="255" value="{{ old('data.BlogSeo.meta_keywords', optional($exhibition->blog_seo)->meta_keywords) }}">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="ContentSeoMetaDescriptions">{{ __('Descriptions') }}</label>
-										<textarea name="data[BlogSeo][meta_descriptions]" class="form-control" id="ContentSeoMetaDescriptions" rows="5" placeholder="{{ __('Enter meta descriptions') }}">{{ old('data.BlogSeo.meta_descriptions', optional($exhibition->blog_seo)->meta_descriptions) }}</textarea>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					
+					
+					
 				</div>
 			</div>	
 			<div class="col-md-4">
@@ -245,114 +78,75 @@
 								<div class="row">
 									<div class="col-md-12 form-group">
 										<label for="Status"><i class="fa fa-key"></i> {{ __('Status:') }}</label>
-										<select name="data[Exhibition][status]" id="Status" class="default-select form-control">
-											<option value="1" {{ old('data.Exhibition.status', $exhibition->status) == 1 ? 'selected="selected"' : '' }}>{{ __('Published') }}</option>
-		                    				<option value="2" {{ old('data.Exhibition.status', $exhibition->status) == 2 ? 'selected="selected"' : '' }}>{{ __('Draft') }}</option>
+										<select name="data[Album][status]" id="Status" class="default-select form-control">
+											<option value="1" {{ old('data.Album.status', $album->status) == 1 ? 'selected="selected"' : '' }}>{{ __('Published') }}</option>
+		                    				<option value="2" {{ old('data.Album.status', $album->status) == 2 ? 'selected="selected"' : '' }}>{{ __('Draft') }}</option>
 
-		                    				@if($exhibition->status == 3)
-		                    					<option value="3" {{ old('data.Exhibition.status', $exhibition->status) == 3 ? 'selected="selected"' : '' }}>{{ __('Trash') }}</option>
+		                    				@if($album->status == 3)
+		                    					<option value="3" {{ old('data.Album.status', $album->status) == 3 ? 'selected="selected"' : '' }}>{{ __('Trash') }}</option>
 		                    				@endif
-		                    				<option value="4" {{ old('data.Exhibition.status', $exhibition->status) == 4 ? 'selected="selected"' : '' }}>{{ __('Private') }}</option>
-		                    				<option value="5" {{ old('data.Exhibition.status', $exhibition->status) == 5 ? 'selected="selected"' : '' }}>{{ __('Pending') }}</option>
+		                    				<option value="4" {{ old('data.Album.status', $album->status) == 4 ? 'selected="selected"' : '' }}>{{ __('Private') }}</option>
+		                    				<option value="5" {{ old('data.Album.status', $album->status) == 5 ? 'selected="selected"' : '' }}>{{ __('Pending') }}</option>
 										</select>
 									</div>
 									<div class="col-md-12 form-group">
 										<label for="ContentVisibility"><i class="fa fa-eye"></i> {{ __('Visibility:') }}</label>
-										<select name="data[Exhibition][visibility]" id="ContentVisibility" class="default-select form-control">
-											<option value="Pu" {{ old('data.Exhibition.visibility', $exhibition->visibility) == 'Pu' ? 'selected="selected"' : '' }}>{{ __('Public') }}</option>
-		                    				<option value="PP" {{ old('data.Exhibition.visibility', $exhibition->visibility) == 'PP' ? 'selected="selected"' : '' }}>{{ __('Password protected') }}</option>
-		                    				<option value="Pr" {{ old('data.Exhibition.visibility', $exhibition->visibility) == 'Pr' ? 'selected="selected"' : '' }}>{{ __('Private') }}</option>
+										<select name="data[Album][visibility]" id="ContentVisibility" class="default-select form-control">
+											<option value="Pu" {{ old('data.Album.visibility', $album->visibility) == 'Pu' ? 'selected="selected"' : '' }}>{{ __('Public') }}</option>
+		                    				<option value="PP" {{ old('data.Album.visibility', $album->visibility) == 'PP' ? 'selected="selected"' : '' }}>{{ __('Password protected') }}</option>
+		                    				<option value="Pr" {{ old('data.Album.visibility', $album->visibility) == 'Pr' ? 'selected="selected"' : '' }}>{{ __('Private') }}</option>
 										</select>
 									</div>
-									<div class="col-md-12 form-group {{ old('visibility', $exhibition->visibility) == 'PP' ? '' : 'd-none' }}" id="PublicPasswordTextbox">
+									<div class="col-md-12 form-group {{ old('visibility', $album->visibility) == 'PP' ? '' : 'd-none' }}" id="PublicPasswordTextbox">
 										<label for="ContentPassword">{{ __('Password') }}</label>
-										<input type="password" name="data[Exhibition][password]" class="form-control" id="ContentPassword" placeholder="{{ __('Enter Password') }}" value="{{ old('data.Exhibition.password', $exhibition->password)}}" autocomplete="New-Password">
+										<input type="password" name="data[Album][password]" class="form-control" id="ContentPassword" placeholder="{{ __('Enter Password') }}" value="{{ old('data.Album.password', $album->password)}}" autocomplete="New-Password">
 									</div>
 									<div class="col-md-12 form-group" id="PublicPasswordTextbox">
 										<label for="PublishDateTimeTextbox"><i class="fa fa-calendar"></i> {{ __('Published on:') }}</label>
-										<input type="text" name="data[Exhibition][publish_on]" class="datetimepicker form-control" id="PublishDateTimeTextbox" value="{{ $exhibition->publish_on ? old('data.Exhibition.publish_on', $exhibition->publish_on) : date('Y-m-d') }}">
+										<input type="text" name="data[Album][publish_on]" class="datetimepicker form-control" id="PublishDateTimeTextbox" value="{{ $album->publish_on ? old('data.Album.publish_on', $album->publish_on) : date('Y-m-d') }}">
 									</div>
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
-										@if($exhibition->status != 3)
-			                    			<a href="{{ route('blog.admin.admin_trash_status', $exhibition->id) }}" class="btn btn-danger">{{ __('Move to Trash') }}</a>
+										@if($album->status != 3)
+			                    			<a href="{{ route('blog.admin.admin_trash_status', $album->id) }}" class="btn btn-danger">{{ __('Move to Trash') }}</a>
 			                    		@endif
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12">
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XCategories {{ $screenOption['Categories']['visibility'] ? '' : 'd-none' }}" id="accordion-categories">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-categories" aria-expanded="true">
-								<h4 class="card-title">{{ __('Categories') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show appendCategory" id="with-categories" data-bs-parent="#accordion-categories">
-								
-								<a href="javascript:void(0)" title="{{ __('Click to add new category') }}" class="addNewBlogCategorylink text-primary d-block my-2"><i class="fa fa-plus"></i>{{ __('Add New Category') }}</a>
-								<div class="col-md-12 form-group newCategoryDiv">
-									<div class="form-group">
-										<label for="BlogCategoryBlogCategory">{{ __('New Category Name') }}</label>
-                          				<input type="text" class="form-control newCategoryField mb-2" id="BlogCategoryBlogCategory">
-									</div>
-									<div class="form-group">
-										<label for="ParentBlogCategory">{{ __('Parent Category') }}</label>
-										<select id="ParentBlogCategory" class="default-select form-control CategoryParentId">
-											<option value="">{{ __('-Parent Category-') }}</option>
-											
-										</select>
-									</div>
-                          			<input type="hidden" class="form-control rdx-link" value="{{ route("blog_category.admin.admin_ajax_add_category") }}">
-                         			<button type="button" class="btn btn-primary addNewBlogCategoryBtn">{{ __('Add New') }}</button>
-                         		</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XTags {{ $screenOption['Tags']['visibility'] ? '' : 'd-none' }}" id="accordion-tags">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-tags" aria-expanded="true">
-								<h4 class="card-title">{{ __('Tags') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show" id="with-tags" data-bs-parent="#accordion-tags">
-								<div class="form-group">	
-									
-								</div>
-							</div>
-						</div>
-					</div>
+					
 					<div class="col-md-12">
 						@php
-							$ximageMeta = $exhibition->feature_img;
+							$ximageMeta = $album->feature_img;
                     		$ximage_url = isset($ximageMeta->value) ? asset('storage/blog-images/'.$ximageMeta->value) : asset('images/noimage.jpg');
-								//dd($exhibition);
+								//dd($album);
 							@endphp
 							
 						
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XFeaturedImage {{ $screenOption['FeaturedImage']['visibility'] ? '' : 'd-none' }}" id="accordion-feature-image">
+						<div class="card accordion accordion-rounded-stylish accordion-bordered XFeaturedImage" id="accordion-feature-image">
 							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-feature-image" aria-expanded="true">
 								<h4 class="card-title">{{ __('Featured Image') }}</h4>
 								<span class="accordion-header-indicator"></span>
 							</div>
 							<div class="accordion__body p-4 collapse show" id="with-feature-image" data-bs-parent="#accordion-feature-image">
 								<div class="featured-img-preview img-parent-box">
-									<div id="RemoveItemImg_{{ $exhibition->id }}">
-										<img src="{{ route('exhibition.exhibitionPublicImagePreview', ['id' =>  $exhibition->id]) }}" class="avatar img-for-onchange"  alt="{{ __('Image') }}" title="{{ __('Image') }}"> 
+									<div id="RemoveItemImg_{{ $album->id }}">
+										<img src="{{ route('exhibition.exhibitionPublicImagePreview', ['id' =>  $album->id]) }}" class="avatar img-for-onchange"  alt="{{ __('Image') }}" title="{{ __('Image') }}"> 
 									</div>
 									<div class="d-flex align-items-center">
 										@if(!empty($ximageMeta->value))
-										<a href="javascript:void(0);" rdx-link="{{ route('blog.admin.remove_feature_image', $exhibition->id) }}" class="rdxUpdateAjax btn btn-primary btn-xs rounded-0 me-2" rdx-delete-box="RemoveItemImg_{{ $exhibition->id }}">{{ __('Remove') }}</a>
+										<a href="javascript:void(0);" rdx-link="{{ route('blog.admin.remove_feature_image', $album->id) }}" class="rdxUpdateAjax btn btn-primary btn-xs rounded-0 me-2" rdx-delete-box="RemoveItemImg_{{ $album->id }}">{{ __('Remove') }}</a>
 										@endif
 										<div class="form-file">
-											<input type="file" class="ps-2 form-control img-input-onchange" name="data[ExhibitionMeta][0][value]" accept=".png, .jpg, .jpeg"  id="ExhibitionMeta0Value" >
+											<input type="file" class="ps-2 form-control img-input-onchange" name="data[AlbumMeta][0][value]" accept=".png, .jpg, .jpeg"  id="AlbumMeta0Value" >
 										</div>
 									</div>
-									<input type="hidden" name="data[ExhibitionMeta][0][title]" value="ximage" id="ContentMeta0Title">
-									<input type="hidden" name="data[ExhibitionMeta][0][meta_id]" value="{{ isset($ximageMeta->id) ? $ximageMeta->id : 0 }}">
-									<input type="hidden" name="data[ExhibitionMeta][0][old_value]" value="{{ isset($ximageMeta->value) ? $ximageMeta->value : '' }}">
+									<input type="hidden" name="data[AlbumMeta][0][title]" value="ximage" id="ContentMeta0Title">
+									<input type="hidden" name="data[AlbumMeta][0][meta_id]" value="{{ isset($ximageMeta->id) ? $ximageMeta->id : 0 }}">
+									<input type="hidden" name="data[AlbumMeta][0][old_value]" value="{{ isset($ximageMeta->value) ? $ximageMeta->value : '' }}">
 							   	</div>
-								@error('data.ExhibitionMeta.0.value')
+								@error('data.AlbumMeta.0.value')
 								  <p class="text-danger">
 								      {{ $message }}
 								  </p>
@@ -360,22 +154,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12">
-						@php
-							$xvideoMeta = $exhibition->video;
-                    		$xvideo_url = !empty($xvideoMeta->value) ? $xvideoMeta->value : '';
-						@endphp
-						<div class="card accordion accordion-rounded-stylish accordion-bordered XVideo {{ $screenOption['Video']['visibility'] ? '' : 'd-none' }}" id="accordion-video">
-							<div class="card-header justify-content-start accordion-header" data-bs-toggle="collapse" data-bs-target="#with-video" aria-expanded="true">
-								<h4 class="card-title">{{ __('Video') }}</h4>
-								<span class="accordion-header-indicator"></span>
-							</div>
-							<div class="accordion__body p-4 collapse show" id="with-video" data-bs-parent="#accordion-video">
-								<input type="hidden" name="data[ExhibitionMeta][1][title]" value="xvideo" id="ExhibitionMeta1Title">
-								<input type="text" name="data[ExhibitionMeta][1][value]" class="form-control bootstrap-tagsinput" placeholder="{{ __('Youtube Video Link') }}" id="ExhibitionMeta1Value" value="{{ $xvideo_url }}">
-							</div>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
